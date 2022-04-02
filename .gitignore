@@ -1,0 +1,15 @@
+/admin/node_modules
+/client/node_modules
+/server/node_modules
+.env
+
+node_modules
+build
+
+#for desktop app
+*.dll
+*.exe
+*.pdb
+*.log
+*.g.cs
+*.g.i.cs

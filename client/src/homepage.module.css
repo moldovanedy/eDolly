@@ -1,0 +1,77 @@
+body {
+    background-color: #ebebeb;
+}
+
+.productContainer {
+    background-color: #ffffff;
+    width: 90%;
+    margin: auto;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.scrollableContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.product {
+    width: 150px;
+    position: relative;
+    height: 270px;
+    margin: 10px;
+    min-width: 150px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.oldPriceStyle {
+    font-size: 12px;
+    margin: 3px;
+    text-decoration: line-through;
+}
+
+.oldPriceSuperscriptStyle {
+    font-size: 12px;
+    text-decoration: none !important;
+}
+
+.productNavigator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonLeft {
+    height: 70px;
+    width: 40px;
+    margin-left: 2%;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #777777;
+}
+
+.buttonRight {
+    height: 70px;
+    width: 40px;
+    float: left;
+    margin-right: 2%;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #777777;
+}
+
+.footer {
+    width: 100%;
+    background-color: #a6bff3;
+    min-height: 100px;
+}

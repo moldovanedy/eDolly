@@ -1,0 +1,23 @@
+{
+    "name": "@edolly/server",
+    "version": "0.1.0",
+    "description": "Partea de server a site-ului eDolly",
+    "private": true,
+    "main": "server.js",
+    "scripts": {
+        "server-start": "nodemon server.js"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "ejs": "^3.1.6",
+        "express": "^4.17.1",
+        "jimp": "^0.16.1",
+        "multer": "^1.4.3",
+        "mysql": "^2.18.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.13"
+    }
+}

@@ -1,0 +1,31 @@
+﻿<Page x:Class="TestDataGenerator.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestDataGenerator"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+
+    <Grid>
+        <Button x:Name="AdministratorDate" Content="Administrator date" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Center" Height="168" Width="225" FontSize="20" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1BCDE4"/>
+                    <GradientStop Color="#FF3855FB" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="GeneratorDateProba" Content="Generator date probă" HorizontalAlignment="Right" Margin="0,0,80,0" VerticalAlignment="Center" Height="168" Width="225" FontSize="20" FontWeight="Bold" Click="GeneratorDateProba_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFF2424" Offset="0.003"/>
+                    <GradientStop Color="#FFE87E13" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBlock HorizontalAlignment="Center" Margin="0,22,0,0" TextWrapping="Wrap" Text="Administrator magazin eDolly" VerticalAlignment="Top" Height="63" Width="530" FontSize="36" Foreground="Black" FontWeight="Bold"/>
+
+    </Grid>
+</Page>
