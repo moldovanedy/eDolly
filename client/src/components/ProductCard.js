@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { increment } from "./Cart/productManager";
+import { increment, decrement } from "./Cart/productManager";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 import style from "./../homepage.module.css";
-import { addToFavourites } from "./Cart/productManager";
+import { addToFavourites, removeFromFavourites } from "./Cart/productManager";
 
 function ProductCard(props) {
     const dispatch = useDispatch();
@@ -18,12 +18,18 @@ function ProductCard(props) {
                     icon={faHeart}
                     size="lg"
                     onClick={() => {
-                        addToFavourites(props.uuid);
-                        dispatch(increment());
+                        var isAdded = addToFavourites(props.uuid);
+                        if (isAdded !== null) {
+                            dispatch(increment());
+                        } else {
+                            removeFromFavourites(props.uuid);
+                            dispatch(decrement());
+                        }
                     }}
                     style={{
                         position: "absolute",
                         marginLeft: "120px",
+                        color: props.isFavourite ? "#f00" : "#444",
                         cursor: "pointer"
                     }}
                 />

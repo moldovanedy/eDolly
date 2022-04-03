@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 import Header from "../components/Header";
-import { getProducts } from "../components/Cart/productManager";
+import { getFavouriteProducts } from "../components/Cart/productManager";
 
 function FavouriteProducts() {
     return (
@@ -13,7 +13,7 @@ function FavouriteProducts() {
 
             <Header />
 
-            <p>{getProducts()}</p>
+            <p>{getFavouriteProducts()}</p>
         </>
     );
 }

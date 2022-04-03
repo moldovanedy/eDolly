@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export function getProducts(id) {
+export function getFavouriteProducts(id) {
     let regex = /(.*?);/g;
     let favProductsRaw = localStorage.getItem("favouriteProducts");
 
@@ -12,12 +12,16 @@ export function getProducts(id) {
     if (id === undefined) {
         return favProductsArray;
     } else {
-        return favProductsArray.find(id);
+        if (favProductsArray !== null) {
+            return favProductsArray.find((prodId) => {
+                return prodId === id;
+            }, undefined);
+        }
     }
 }
 
 export function getNumberOfProducts() {
-    let productArray = getProducts();
+    let productArray = getFavouriteProducts();
     if (productArray === null) {
         return 0;
     } else {
@@ -27,18 +31,35 @@ export function getNumberOfProducts() {
 
 export function addToFavourites(productId) {
     let favProductsRaw = localStorage.getItem("favouriteProducts");
-    //let productAlreadyExists = getProducts(productId) !== null ? true : false;
+    let productAlreadyExists =
+        getFavouriteProducts(productId + ";") !== undefined ? true : false;
 
     if (favProductsRaw === null || favProductsRaw === undefined) {
         localStorage.setItem("favouriteProducts", productId + ";");
     } else {
-        // if (productAlreadyExists) {
-        //     return -1;
-        // }
+        if (productAlreadyExists) {
+            return null;
+        }
         localStorage.setItem(
             "favouriteProducts",
             favProductsRaw + productId + ";"
         );
+    }
+}
+
+export function removeFromFavourites(productId) {
+    let favProductsRaw = localStorage.getItem("favouriteProducts");
+    let product = getFavouriteProducts(productId + ";");
+
+    if (
+        favProductsRaw === null ||
+        favProductsRaw === undefined ||
+        product === undefined
+    ) {
+        return null;
+    } else {
+        let newFavProductsRaw = favProductsRaw.replace(productId + ";", "");
+        localStorage.setItem("favouriteProducts", newFavProductsRaw);
     }
 }
 

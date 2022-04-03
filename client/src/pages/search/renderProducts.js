@@ -1,8 +1,10 @@
 import React from "react";
+
 import defaultImage from "./../../assets/images/Img_even_2.jpg";
 import ProductCard from "../../components/ProductCard";
+import { getFavouriteProducts } from "../../components/Cart/productManager";
 
-function render(prod, filters, sort) {
+function render(prod, filters = null, sort = null) {
     var productName,
         productOldPriceFloor,
         productOldPriceRemainder,
@@ -11,8 +13,12 @@ function render(prod, filters, sort) {
         imageUrl = defaultImage;
     // productUuid;
     var i = 0;
+    let isFavProduct = false;
 
-    console.log(filters);
+    if (filters !== null) {
+        console.log(filters);
+    }
+
     return prod.map((product) => {
         if (product.Name.length > 40) {
             productName = product.Name.substring(0, 40) + "...";
@@ -49,14 +55,19 @@ function render(prod, filters, sort) {
         }
         i++;
 
+        //checks if this product is favourite
+        isFavProduct = getFavouriteProducts(product.id + ";");
+
         //<filters>
-        if (
-            product.Price < filters.minPrice ||
-            product.Price > filters.maxPrice
-            // product.Rating < filters.minRating ||
-            // product.Rating > filters.maxRating
-        ) {
-            return null;
+        if (filters !== null) {
+            if (
+                product.Price < filters.minPrice ||
+                product.Price > filters.maxPrice
+                // product.Rating < filters.minRating ||
+                // product.Rating > filters.maxRating
+            ) {
+                return null;
+            }
         }
         //</filters>
 
@@ -72,8 +83,9 @@ function render(prod, filters, sort) {
                         : parseFloat(productPriceRemainder).toFixed(0)
                 }
                 imgUrl={imageUrl}
-                key={i}
                 uuid={product.id}
+                isFavourite={isFavProduct}
+                key={i}
             />
         );
     });
