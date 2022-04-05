@@ -32,31 +32,30 @@ function SearchResults() {
     //<sorting>
     function onChangeSortingRule(e) {
         e.preventDefault();
-        setTimeout(() => {
-            let sortText = e.target.value,
-                sortingRule;
-            switch (sortText) {
-                case "Relevanță":
-                    sortingRule = "random";
-                    break;
-                case "Preț crescător":
-                    sortingRule = "priceAsc";
-                    break;
-                case "Preț descrescător":
-                    sortingRule = "priceDesc";
-                    break;
-                case "Reducere (%)":
-                    sortingRule = "discount";
-                    break;
-                default:
-                    sortingRule = "random";
-            }
-            setSort((prevValue) => ({
-                ...prevValue,
-                sortingRule: sortingRule
-            }));
-            console.log(sort);
-        }, 100);
+        console.log(e.target.value);
+        let sortText = e.target.value,
+            sortingRule;
+        switch (sortText) {
+            case "Relevanță":
+                sortingRule = "random";
+                break;
+            case "Preț crescător":
+                sortingRule = "priceAsc";
+                break;
+            case "Preț descrescător":
+                sortingRule = "priceDesc";
+                break;
+            case "Reducere (%)":
+                sortingRule = "discount";
+                break;
+            default:
+                sortingRule = "random";
+        }
+        setSort((prevValue) => ({
+            ...prevValue,
+            sortingRule: sortingRule
+        }));
+        console.log(sort);
     }
 
     function onChangeProductsPerPage(e) {
@@ -78,11 +77,6 @@ function SearchResults() {
         <>
             <Helmet>
                 <title>{categorie}</title>
-                <link
-                    rel="icon"
-                    href="./../../assets/icons/favicon.ico?"
-                    type="image/x-icon"
-                />
             </Helmet>
             <Header />
 
@@ -127,6 +121,7 @@ function SearchResults() {
                         <option>80</option>
                         <option>100</option>
                     </select>
+
                     <br />
                     <br />
                 </div>

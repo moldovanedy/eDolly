@@ -63,7 +63,7 @@ export function removeFromFavourites(productId) {
     }
 }
 
-//#region redux
+//<redux>
 const initialState = {
     value: getNumberOfProducts()
 };
@@ -80,7 +80,7 @@ export const productCounter = createSlice({
         }
     }
 });
-//#endregion
+//</redux>
 
 export const { increment, decrement } = productCounter.actions;
 

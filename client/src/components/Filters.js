@@ -8,13 +8,11 @@ import {
     setMinRating,
     setMaxRating
 } from "./filterManager";
-import { useNavigate } from "react-router-dom";
 
 import style from "./../pages/search/searchResults.module.css";
 
 function Filters() {
     const dispatch = useDispatch();
-    var navigate = useNavigate();
 
     var [filters, setFilters] = useState({
         availability: "",
@@ -31,7 +29,10 @@ function Filters() {
         dispatch(setMaxPrice(parseInt(filters.maxPrice)));
         dispatch(setMinRating(parseInt(filters.minRating)));
         dispatch(setMaxRating(parseInt(filters.maxRating)));
-        navigate("/adaddda");
+        document.getElementById("minimumPrice").innerText = filters.minPrice;
+        document.getElementById("maximumPrice").innerText = filters.minPrice;
+        document.getElementById("minimumRating").innerText = filters.minPrice;
+        document.getElementById("maximumRating").innerText = filters.minPrice;
     }
 
     function onChangeAvailability(e) {
@@ -48,12 +49,10 @@ function Filters() {
         if (isNaN(price) || price < 0 || price >= filters.maxPrice) {
             document.getElementById("minimumPrice").style.backgroundColor =
                 "#e3796d";
-            e.target.value = filters.minPrice;
             return null;
         }
         setFilters((prevValue) => ({ ...prevValue, minPrice: price }));
         document.getElementById("minimumPrice").style.backgroundColor = "#fff";
-        //e.target.text = price;
     }
 
     function onChangeMaxPrice(e) {
@@ -62,7 +61,6 @@ function Filters() {
         if (isNaN(price) || price < 0 || price <= filters.minPrice) {
             document.getElementById("maximumPrice").style.backgroundColor =
                 "#e3796d";
-            e.target.value = filters.maxPrice;
             return null;
         }
         setFilters((prevValue) => ({ ...prevValue, maxPrice: price }));
@@ -78,7 +76,6 @@ function Filters() {
             rating > 5 ||
             rating >= filters.maxRating
         ) {
-            e.target.value = filters.minRating;
             return null;
         }
         setFilters((prevValue) => ({ ...prevValue, minRating: rating }));
@@ -92,7 +89,6 @@ function Filters() {
             rating > 5 ||
             rating <= filters.minRating
         ) {
-            e.target.value = filters.maxRating;
             return null;
         }
         setFilters((prevValue) => ({ ...prevValue, maxRating: rating }));
