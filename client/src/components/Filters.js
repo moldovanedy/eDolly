@@ -30,9 +30,9 @@ function Filters() {
         dispatch(setMinRating(parseInt(filters.minRating)));
         dispatch(setMaxRating(parseInt(filters.maxRating)));
         document.getElementById("minimumPrice").innerText = filters.minPrice;
-        document.getElementById("maximumPrice").innerText = filters.minPrice;
-        document.getElementById("minimumRating").innerText = filters.minPrice;
-        document.getElementById("maximumRating").innerText = filters.minPrice;
+        document.getElementById("maximumPrice").innerText = filters.maxPrice;
+        document.getElementById("minimumRating").innerText = filters.minRating;
+        document.getElementById("maximumRating").innerText = filters.maxRating;
     }
 
     function onChangeAvailability(e) {

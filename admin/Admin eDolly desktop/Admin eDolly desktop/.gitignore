@@ -3,3 +3,10 @@
 ./Admin_eDolly_Desktop/obj
 ./Admin_eDolly_Desktop/packages
 ./Admin_eDolly_Desktop/Admin eDolly Desktop_TemporaryKey.pfx
+
+.vs
+./GenerateTestData/bin
+./GenerateTestData/obj
+
+*.cache
+*.application

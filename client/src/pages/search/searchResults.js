@@ -11,9 +11,16 @@ import render from "./renderProducts";
 import Footer from "./../../components/Footer";
 import style from "./searchResults.module.css";
 import Filters from "./../../components/Filters";
+import { useDispatch } from "react-redux";
+import {
+    changeSortingRule,
+    setProductsPerPage
+} from "./../../components/sortingManager";
 
 function SearchResults() {
     var { categorie } = useParams();
+
+    const dispatch = useDispatch();
 
     var defaultRequest = {
         name: "",
@@ -32,7 +39,6 @@ function SearchResults() {
     //<sorting>
     function onChangeSortingRule(e) {
         e.preventDefault();
-        console.log(e.target.value);
         let sortText = e.target.value,
             sortingRule;
         switch (sortText) {
@@ -56,6 +62,8 @@ function SearchResults() {
             sortingRule: sortingRule
         }));
         console.log(sort);
+        dispatch(changeSortingRule(sort.sortingRule));
+        dispatch(setProductsPerPage(parseInt(sort.productsPerPage)));
     }
 
     function onChangeProductsPerPage(e) {
@@ -67,6 +75,8 @@ function SearchResults() {
             }));
             console.log(sort);
         }, 100);
+        dispatch(changeSortingRule(sort.sortingRule));
+        dispatch(setProductsPerPage(parseInt(sort.productsPerPage)));
     }
     //</sorting>
 
