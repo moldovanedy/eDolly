@@ -1,15 +1,6 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//prettier-ignore
-import { faLaptop, faMouse, faTv, faCamera } from "@fortawesome/free-solid-svg-icons";
-
-import Smartphone from "./../assets/icons/Smartphone.svg";
-import Electrocasnice from "./../assets/icons/Electrocasnice.svg";
-
 export const ProductCategories = [
     {
         name: "Telefoane și tablete",
-        icon: <img src={Smartphone} width={12} alt="Smartphone" />,
         subCategories: [
             "Telefoane",
             "Accesorii telefoane",
@@ -19,7 +10,6 @@ export const ProductCategories = [
     },
     {
         name: "Laptop-uri",
-        icon: <FontAwesomeIcon icon={faLaptop} size="1x" />,
         subCategories: [
             "Laptop-uri",
             "Accesorii laptop-uri",
@@ -28,7 +18,6 @@ export const ProductCategories = [
     },
     {
         name: "PC",
-        icon: <FontAwesomeIcon icon={faMouse} size="1x" />,
         subCategories: [
             "Desktop-uri",
             "Periferice",
@@ -40,7 +29,6 @@ export const ProductCategories = [
     },
     {
         name: "TV",
-        icon: <FontAwesomeIcon icon={faTv} size="1x" />,
         subCategories: [
             "Televizoare",
             "Accesorii televizoare",
@@ -49,7 +37,6 @@ export const ProductCategories = [
     },
     {
         name: "Aparate foto",
-        icon: <FontAwesomeIcon icon={faCamera} size="1x" />,
         subCategories: [
             "Aparate foto",
             "Accesorii foto",
@@ -59,7 +46,6 @@ export const ProductCategories = [
     },
     {
         name: "Electrocasnice",
-        icon: <img src={Electrocasnice} width={12} alt="Electrocasnice" />,
         subCategories: [
             "Aparate frigorifice",
             "Mașini de spălat",

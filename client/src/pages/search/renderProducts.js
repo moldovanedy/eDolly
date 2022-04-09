@@ -11,7 +11,6 @@ function render(prod, filters = null, sort = null) {
         productPriceFloor,
         productPriceRemainder,
         imageUrl = defaultImage;
-    // productUuid;
     var i = 0;
     let isFavProduct = false;
 

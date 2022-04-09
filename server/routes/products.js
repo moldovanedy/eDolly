@@ -175,6 +175,12 @@ router.route("/add").post((req, res) => {
     const category = req.body.category;
     const description = req.body.description;
     const specifications = req.body.specifications;
+    // const password = req.body.password;
+
+    // if(!(password === "Dolly!Admin04")) {
+    //     res.status(403).send("Acces interzis!");
+    //     return;
+    // }
     pool.query(
         `INSERT INTO products (id, Name, Price, Stock, Category, Description, Specifications ) VALUES (UUID_TO_BIN(UUID()), "${name}", ${price}, ${stock}, "${category}", "${description}", "${specifications}")`,
         (err, result, fields) => {
@@ -268,7 +274,17 @@ function createThumbnail(path) {
 /**
  * @description finds a product by id
  */
-router.route("/:id").get((req, res) => {});
+router.route("/id=:id").get((req, res) => {
+    pool.query(
+        `SELECT BIN_TO_UUID(id) id, Name, Price, OldPrice, Category, Description, Specifications, Reviews, Rating FROM products WHERE id = UUID_TO_BIN('${req.params.id}');`,
+        (err, result, fields) => {
+            if (err) {
+                res.send("Eroare!");
+            }
+            res.send(result[0]);
+        }
+    );
+});
 
 /**
  * @description deletes a product by id

@@ -16,6 +16,7 @@ import {
     changeSortingRule,
     setProductsPerPage
 } from "./../../components/sortingManager";
+import logo from "./../../assets/icons/favicon.ico";
 
 function SearchResults() {
     var { categorie } = useParams();
@@ -68,13 +69,11 @@ function SearchResults() {
 
     function onChangeProductsPerPage(e) {
         e.preventDefault();
-        setTimeout(() => {
-            setSort((prevValue) => ({
-                ...prevValue,
-                productsPerPage: parseFloat(e.target.value)
-            }));
-            console.log(sort);
-        }, 100);
+        setSort((prevValue) => ({
+            ...prevValue,
+            productsPerPage: parseFloat(e.target.value)
+        }));
+        console.log(sort);
         dispatch(changeSortingRule(sort.sortingRule));
         dispatch(setProductsPerPage(parseInt(sort.productsPerPage)));
     }
@@ -87,6 +86,7 @@ function SearchResults() {
         <>
             <Helmet>
                 <title>{categorie}</title>
+                <link rel="icon" href={logo} />
             </Helmet>
             <Header />
 
