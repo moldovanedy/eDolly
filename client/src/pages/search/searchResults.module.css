@@ -45,3 +45,23 @@
 .applyFiltersButton:hover {
     background-color: #9c9c9c;
 }
+
+.mainContainerSearch {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}
+
+.mainContainerSearch a {
+    color: #000;
+    text-decoration: none;
+}
+
+.mainContainerSearch a div {
+    transition: background-color ease-in-out 0.3s;
+}
+
+.mainContainerSearch a div:hover {
+    background-color: #dddce9;
+}

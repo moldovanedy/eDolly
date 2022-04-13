@@ -7,7 +7,7 @@ import {
     setMaxPrice,
     setMinRating,
     setMaxRating
-} from "./filterManager";
+} from "./filterManager.component";
 
 import style from "./../pages/search/searchResults.module.css";
 

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import productManager from "./components/Cart/productManager";
-import filterManager from "./components/filterManager";
-import sortingManager from "./components/sortingManager";
+import productManager from "./components/Cart/productManager.redux";
+import filterManager from "./components/filterManager.component";
+import sortingManager from "./components/sortingManager.component";
 
 export const store = configureStore({
     reducer: {

@@ -6,16 +6,16 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 
-import Header from "./../../components/Header";
+import Header from "../../components/Header.component";
 import render from "./renderProducts";
-import Footer from "./../../components/Footer";
+import Footer from "../../components/Footer.component";
 import style from "./searchResults.module.css";
-import Filters from "./../../components/Filters";
+import Filters from "../../components/Filters.component";
 import { useDispatch } from "react-redux";
 import {
     changeSortingRule,
     setProductsPerPage
-} from "./../../components/sortingManager";
+} from "../../components/sortingManager.component";
 import logo from "./../../assets/icons/favicon.ico";
 
 function SearchResults() {
@@ -91,7 +91,6 @@ function SearchResults() {
             <Header />
 
             <Breadcrumb>
-                <Breadcrumb.Item href="#">Categorie</Breadcrumb.Item>
                 <Breadcrumb.Item active>{categorie}</Breadcrumb.Item>
             </Breadcrumb>
 
@@ -139,14 +138,7 @@ function SearchResults() {
                     <div className={style.mainContent}>
                         <Filters />
 
-                        <main
-                            style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                flexWrap: "wrap",
-                                maxWidth: "1000px"
-                            }}
-                        >
+                        <main className={style.mainContainerSearch}>
                             {useEffect(() => {
                                 axios
                                     .post(

@@ -281,7 +281,7 @@ router.route("/id=:id").get((req, res) => {
             if (err) {
                 res.send("Eroare!");
             }
-            res.send(result[0]);
+            res.send(result);
         }
     );
 });

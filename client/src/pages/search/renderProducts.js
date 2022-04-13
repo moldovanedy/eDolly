@@ -1,8 +1,8 @@
 import React from "react";
 
 import defaultImage from "./../../assets/images/Img_even_2.jpg";
-import ProductCard from "../../components/ProductCard";
-import { getFavouriteProducts } from "../../components/Cart/productManager";
+import ProductCard from "../../components/ProductCard.component";
+import { getFavouriteProducts } from "../../components/Cart/productManager.redux";
 
 function render(prod, filters = null, sort = null) {
     var productName,
@@ -17,6 +17,8 @@ function render(prod, filters = null, sort = null) {
     if (filters !== null) {
         console.log(filters);
     }
+
+    // console.log(prod.length);
 
     return prod.map((product) => {
         if (product.Name.length > 40) {

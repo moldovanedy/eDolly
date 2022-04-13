@@ -9,7 +9,7 @@ import Obj3DSelector from "./components/Obj3DSelector";
 import logo from "./../logo.svg";
 import styles from "./addProduct.module.css";
 import "./../App.css";
-import { ProductCategories } from "./../components/ProductCategories";
+import { ProductCategories } from "./../components/ProductCategories.component";
 
 function AddProduct() {
     const [product, setProduct] = useState({

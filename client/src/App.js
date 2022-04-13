@@ -8,6 +8,7 @@ import Cart from "./pages/cart";
 import FavouriteProducts from "./pages/favouriteProducts";
 import PrivacyPolicy from "./pages/help/PrivacyPolicy";
 import SearchResults from "./pages/search/searchResults";
+import Product from "./pages/product";
 
 //import { productArray } from "./components/ProductCategories";
 
@@ -31,6 +32,8 @@ function App() {
                     path={`/produse/:categorie`}
                     element={<SearchResults />}
                 />
+
+                <Route path={"/produs/:id"} element={<Product />} />
 
                 <Route
                     path="/confidentialitate"
