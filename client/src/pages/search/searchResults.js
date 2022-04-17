@@ -15,8 +15,9 @@ import { useDispatch } from "react-redux";
 import {
     changeSortingRule,
     setProductsPerPage
-} from "../../components/sortingManager.component";
+} from "../../components/sortingManager.redux";
 import logo from "./../../assets/icons/favicon.ico";
+import ProductCardPlaceholder from "../../components/Product/ProductCardPlaceholder.component";
 
 function SearchResults() {
     var { categorie } = useParams();
@@ -36,6 +37,8 @@ function SearchResults() {
         sortingRule: "random",
         productsPerPage: 100
     });
+
+    var [isDone, setIsDone] = useState(false);
 
     //<sorting>
     function onChangeSortingRule(e) {
@@ -146,13 +149,35 @@ function SearchResults() {
                                         defaultRequest
                                     )
                                     .then((res) => {
-                                        products = setProducts(res.data);
+                                        setProducts(res.data);
+                                        setIsDone(true);
                                     })
                                     .catch((err) => {
                                         console.log("Eroare: " + err);
                                     });
                             }, [])}
-                            {render(products, filters, sort)}
+                            {isDone ? (
+                                render(products, filters, sort)
+                            ) : (
+                                // needs improovements :)
+                                <>
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                    <ProductCardPlaceholder />
+                                </>
+                            )}
                         </main>
                     </div>
                 </div>

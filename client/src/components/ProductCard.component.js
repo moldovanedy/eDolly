@@ -29,6 +29,7 @@ function ProductCard(props) {
                                 removeFromFavourites(props.uuid);
                                 dispatch(decrement());
                             }
+                            return false;
                         }}
                         style={{
                             position: "absolute",

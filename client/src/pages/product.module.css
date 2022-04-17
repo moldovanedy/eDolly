@@ -1,0 +1,49 @@
+.firstPanel {
+    box-sizing: border-box;
+    width: 100%;
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: 45% 20% 30%;
+}
+
+.priceTab {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 70px 60px;
+    gap: 10px 20px;
+}
+
+.price {
+    border-right: 1px solid #535353b7;
+}
+
+.price div {
+    display: block;
+}
+
+.actionButtons {
+    display: block;
+    margin: auto;
+    margin-bottom: 10px;
+    width: 200px;
+    padding: 10px 20px;
+    background-color: #3b3bff;
+    color: #fff;
+    transition: all ease-in 0.2s;
+}
+
+.actionButtons:hover {
+    background-color: #c9c9fc;
+    color: #363636;
+}
+
+@media (prefers-reduced-motion) {
+    .actionButtons {
+        transition: none;
+    }
+
+    .actionButtons:hover {
+        background-color: #c9c9fc;
+        color: #363636;
+    }
+}

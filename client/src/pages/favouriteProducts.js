@@ -6,6 +6,7 @@ import axios from "axios";
 import Header from "../components/Header.component";
 import { getFavouriteProducts } from "../components/Cart/productManager.redux";
 import render from "./search/renderProducts";
+import style from "./search/searchResults.module.css";
 
 function FavouriteProducts() {
     var favourites = getFavouriteProducts();
@@ -25,6 +26,8 @@ function FavouriteProducts() {
         });
     }, []);
 
+    var windowSize = window.innerWidth;
+
     return (
         <>
             <Helmet>
@@ -36,11 +39,8 @@ function FavouriteProducts() {
             <h2>Produse favorite</h2>
 
             <main
-                style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap"
-                }}
+                className={style.mainContainerSearch}
+                style={{ maxWidth: windowSize }}
             >
                 {render(products.arr)}
             </main>
