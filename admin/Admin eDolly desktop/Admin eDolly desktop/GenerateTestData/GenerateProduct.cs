@@ -91,7 +91,7 @@ namespace GenerateTestData
             StringBuilder sb = new StringBuilder("");
             for (int i = 0; i <= numberOfReviews; i++)
             {
-                sb.Append($"[{LoremNET.Lorem.Words(2)}]:{{{{{rand.Next(0, 6)}}}{LoremNET.Lorem.Paragraph(4, 25, 2, 20)}}}"); //ex. [Popescu Ion]:{{5}Foarte bun produsul!}
+                sb.Append($"[{LoremNET.Lorem.Words(2)}]:{{{{{rand.Next(1, 6)}}}{LoremNET.Lorem.Paragraph(4, 25, 2, 20)}}}"); //ex. [Popescu Ion]:{{5}Foarte bun produsul!}
             }
             Reviews = sb.ToString();
         }

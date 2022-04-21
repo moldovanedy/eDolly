@@ -13,17 +13,19 @@ function FavouriteProducts() {
     var [products, setProducts] = useState({ arr: [] });
 
     useEffect(() => {
-        favourites.forEach((element) => {
-            var id = element.substring(0, element.length - 1);
-            axios
-                .get("http://localhost:5000/products/id=" + id)
-                .then((response) => {
-                    setProducts((prevValue) => ({
-                        ...prevValue,
-                        arr: prevValue.arr.concat(response.data)
-                    }));
-                });
-        });
+        if (favourites !== null) {
+            favourites.forEach((element) => {
+                var id = element.substring(0, element.length - 1);
+                axios
+                    .get("http://localhost:5000/products/id=" + id)
+                    .then((response) => {
+                        setProducts((prevValue) => ({
+                            ...prevValue,
+                            arr: prevValue.arr.concat(response.data)
+                        }));
+                    });
+            });
+        }
     }, []);
 
     var windowSize = window.innerWidth;
@@ -43,6 +45,9 @@ function FavouriteProducts() {
                 style={{ maxWidth: windowSize }}
             >
                 {render(products.arr)}
+                {favourites === null || favourites === undefined ? (
+                    <p>Se pare că nu aveți produse favorite...</p>
+                ) : null}
             </main>
         </>
     );

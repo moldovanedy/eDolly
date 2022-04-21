@@ -21,7 +21,7 @@ function ProductCard(props) {
                     <FontAwesomeIcon
                         icon={faHeart}
                         size="lg"
-                        onClick={() => {
+                        onClick={(e) => {
                             var isAdded = addToFavourites(props.uuid);
                             if (isAdded !== null) {
                                 dispatch(increment());
@@ -29,6 +29,7 @@ function ProductCard(props) {
                                 removeFromFavourites(props.uuid);
                                 dispatch(decrement());
                             }
+                            e.preventDefault();
                             return false;
                         }}
                         style={{

@@ -5,10 +5,12 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Breadcrumb } from "react-bootstrap";
 
-import Header from "../components/Header.component";
+import Header from "./../components/Header.component";
+import Footer from "./../components/Footer.component";
 import icon from "./../assets/icons/favicon.ico";
 // import style from "./product.module.css";
-import MainPanel from "../components/Product/MainPanel.component";
+import MainPanel from "./../components/Product/MainPanel.component";
+import DetailsPanel from "./../components/Product/DetailsPanel.component";
 
 function Product() {
     var { id } = useParams();
@@ -63,7 +65,9 @@ function Product() {
                         <hr />
 
                         <MainPanel componentData={data[0]} />
+                        <DetailsPanel componentData={data[0]} />
                     </main>
+                    <Footer />
                 </>
             ) : (
                 ""
