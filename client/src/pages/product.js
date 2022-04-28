@@ -44,6 +44,21 @@ function Product() {
                     <Helmet>
                         <link rel="icon" href={icon} />
                         <title>{displayTitle}</title>
+                        <meta property="og:title" content={title} />
+                        <meta property="og:type" content="website" />
+                        <meta
+                            property="og:url"
+                            content={`http://localhost:3000/produs/${id}`}
+                        />
+                        <meta
+                            property="og:image"
+                            content={`http://localhost:5000/assets/${data[0].Name}/thumbnail.png`}
+                        />
+                        <meta property="og:site_name" content="eDolly" />
+                        <meta
+                            property="og:description"
+                            content="Comandați online de pe eDolly electronice, electrocasnice și multe altele. Livrare rapidă și retur gratuit în 30 de zile."
+                        />
                     </Helmet>
                     <main style={{ margin: "auto", maxWidth: "1200px" }}>
                         <section>

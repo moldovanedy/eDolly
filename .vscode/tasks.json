@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "npm",
+            "script": "start",
+            "path": "admin/",
+            "problemMatcher": [],
+            "label": "Start admin part",
+            "detail": "react-scripts start",
+            "promptOnClose": true
+        },
+        {
+            "type": "npm",
+            "script": "start",
+            "path": "client/",
+            "problemMatcher": [],
+            "label": "Start client part",
+            "detail": "react-scripts start",
+            "promptOnClose": true
+        },
+        {
+            "type": "npm",
+            "script": "start",
+            "path": "server/",
+            "problemMatcher": [],
+            "label": "Start server part",
+            "detail": "react-scripts start",
+            "promptOnClose": true
+        }
+    ]
+}

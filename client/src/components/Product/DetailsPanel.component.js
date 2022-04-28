@@ -12,19 +12,23 @@ function DetailsPanel(props) {
     return (
         <>
             <ProductNavigation />
-            <div className={style.description} id="descriere">
-                <h2>Descriere</h2>
-                <section>{data.Description}</section>
-                <br />
+            <div style={{ backgroundColor: "#fafafa" }}>
+                <div className={style.description} id="descriere">
+                    <h2>Descriere</h2>
+                    <section>{data.Description}</section>
+                    <br />
+                </div>
             </div>
             <div className={style.specifications} id="specificatii">
                 <h2>Specificații</h2>
                 <RenderSpecificationsAsTable rawData={data.Specifications} />
                 <br />
             </div>
-            <div id="recenzii">
-                <h2>Recenzii</h2>
-                <RenderReviews rawData={data.Reviews} />
+            <div style={{ backgroundColor: "#ddd" }}>
+                <div id="recenzii">
+                    <h2>Recenzii</h2>
+                    <RenderReviews rawData={data.Reviews} />
+                </div>
             </div>
         </>
     );

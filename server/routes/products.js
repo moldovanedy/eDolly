@@ -324,4 +324,14 @@ router.route("/update/:id").post((req, res) => {
         );
 });
 
+router.route("/getPhotoNames/name=:name").get((req, res) => {
+    io.readdir(`./../server/assets/${req.params.name}`, (err, files) => {
+        if (err) {
+            console.log(err);
+            res.send([]);
+        }
+        res.send(files);
+    });
+});
+
 module.exports = router;

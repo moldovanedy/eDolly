@@ -10,9 +10,14 @@ import { useDispatch } from "react-redux";
 import style from "./../../pages/product.module.css";
 import { increment, decrement } from "./../Cart/productManager.redux";
 import {
+    incrementCartSize,
+    decrementCartSize
+} from "./../Cart/cartProductManager.redux";
+import {
     addToFavourites,
     removeFromFavourites
 } from "./../Cart/productManager.redux";
+import { addToCart, removeFromCart } from "./../Cart/cartProductManager.redux";
 import ProductImages from "./ProductImages.component";
 
 function MainPanel(props) {
@@ -24,6 +29,7 @@ function MainPanel(props) {
 
     const dispatch = useDispatch();
     var [favButtonText, setFavButtonText] = useState("Adaugă la favorite");
+    var [cartButtonText, setCartButtonText] = useState("Adaugă în coș");
 
     var rating = data.Rating,
         productRating;
@@ -119,10 +125,23 @@ function MainPanel(props) {
                     </span>
                 </div>
                 <div style={{ gridColumn: "1 / 3" }}>
-                    <button className={style.actionButtons}>
+                    <button
+                        className={style.actionButtons}
+                        onClick={() => {
+                            var isAdded = addToCart(data.id);
+                            if (isAdded !== null) {
+                                dispatch(incrementCartSize());
+                                setCartButtonText("Adăugat în coș");
+                            } else {
+                                removeFromCart(data.id);
+                                dispatch(decrementCartSize());
+                                setCartButtonText("Adaugă în coș");
+                            }
+                        }}
+                    >
                         <FontAwesomeIcon icon={faShoppingCart} size={"lg"} />{" "}
                         {"  "}
-                        Adaugă în coș
+                        {cartButtonText}
                     </button>
                     <button
                         className={style.actionButtons}

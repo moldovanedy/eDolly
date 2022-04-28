@@ -68,7 +68,7 @@ const initialState = {
     value: getNumberOfProducts()
 };
 
-export const productCounter = createSlice({
+export const favProductCounter = createSlice({
     name: "products",
     initialState,
     reducers: {
@@ -82,6 +82,5 @@ export const productCounter = createSlice({
 });
 //</redux>
 
-export const { increment, decrement } = productCounter.actions;
-
-export default productCounter.reducer;
+export const { increment, decrement } = favProductCounter.actions;
+export default favProductCounter.reducer;

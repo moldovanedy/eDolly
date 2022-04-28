@@ -1,0 +1,61 @@
+.mainMediaContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.imageContainer {
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: row !important;
+}
+
+.imgCarousel {
+    display: inline;
+    width: 80%;
+    margin: auto;
+    overflow-x: hidden;
+    background-color: #bbb;
+    border-radius: 5px;
+}
+
+.carouselSlider {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.carouselSlider img {
+    margin: 10px;
+}
+
+.imageSliderButton {
+    width: 30px;
+    height: 50px;
+    border: 2px inset #a1a1a1;
+    border-radius: 5px;
+    background-color: #9296c0;
+    transition: all 0.3s ease-in-out;
+}
+
+.imageSliderButton:hover {
+    border-radius: 20px;
+    background-color: #351b8d;
+}
+
+.imageSliderButton svg {
+    transition: all 0.3s ease-in-out;
+}
+
+/* for Font Awesome icon */
+.imageSliderButton:hover svg {
+    color: #fff;
+}
+
+@media prefers-reduced-motion {
+    /* will not change border radius */
+    .imageSliderButton:hover {
+        background-color: #351b8d;
+    }
+}

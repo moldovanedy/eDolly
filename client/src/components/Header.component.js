@@ -14,6 +14,7 @@ function Header() {
     const [searchBoxActive, setSearchBoxActive] = useState(false);
 
     var count = useSelector((state) => state.products.value);
+    var cartSize = useSelector((state) => state.cartProducts.value);
 
     function SearchBox() {
         return (
@@ -102,16 +103,32 @@ function Header() {
                         </div>
                     </Link>
                     <Link to="/cos-de-cumparaturi">
-                        <FontAwesomeIcon
-                            icon={faShoppingCart}
-                            size="1x"
-                            title="Coșul de cumpărături"
-                            style={{
-                                cursor: "pointer",
-                                marginLeft: "10",
-                                color: "#0099ff"
-                            }}
-                        />
+                        <div style={{ position: "relative" }}>
+                            <FontAwesomeIcon
+                                icon={faShoppingCart}
+                                size="1x"
+                                title="Coșul de cumpărături"
+                                style={{
+                                    cursor: "pointer",
+                                    marginLeft: "10",
+                                    color: "#0099ff"
+                                }}
+                            />
+                            {cartSize === 0 ? null : (
+                                <Badge
+                                    pill
+                                    bg="danger"
+                                    style={{
+                                        position: "absolute",
+                                        right: "-12%",
+                                        top: "-20%",
+                                        fontSize: "12px"
+                                    }}
+                                >
+                                    {cartSize}
+                                </Badge>
+                            )}
+                        </div>
                     </Link>
                 </div>
             </header>
