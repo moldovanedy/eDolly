@@ -57,7 +57,6 @@ function AddProduct() {
             }).catch((e) => {
                 console.log(e);
             });
-            //window.location = "/"; //temporar
         }
     }
 

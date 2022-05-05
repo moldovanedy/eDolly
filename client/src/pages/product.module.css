@@ -4,7 +4,7 @@
     width: 100%;
     display: grid;
     column-gap: 20px;
-    grid-template-columns: 45% 20% 30%;
+    grid-template-columns: 400px 20% 30%;
 }
 
 .priceTab {

@@ -64,23 +64,26 @@ body {
     align-items: center;
 }
 
-.buttonLeft {
+.button {
     height: 70px;
     width: 40px;
-    margin-left: 2%;
     cursor: pointer;
     border-radius: 5px;
     border: 1px solid #777777;
+    transition: background-color 0.3s ease-in;
+}
+
+.buttonLeft {
+    margin-left: 2%;
 }
 
 .buttonRight {
-    height: 70px;
-    width: 40px;
     float: left;
     margin-right: 2%;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid #777777;
+}
+
+.button:hover {
+    background-color: #a4b9eb;
 }
 
 .footer {

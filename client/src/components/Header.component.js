@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import style from "./../main.module.css";
 import logo from "../logo.svg";
 import Navigation from "./Navigation.component";
+import axios from "axios";
 
 function Header() {
     const [searchBoxActive, setSearchBoxActive] = useState(false);
@@ -16,13 +17,34 @@ function Header() {
     var count = useSelector((state) => state.products.value);
     var cartSize = useSelector((state) => state.cartProducts.value);
 
+    function search(name) {
+        axios
+            .post("http://localhost:5000/products", {
+                name: name,
+                category: ""
+            })
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     function SearchBox() {
         return (
-            <div id={style.searchBoxWrapper}>
+            <form
+                id={style.searchBoxWrapper}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    search(document.getElementById("searchBox").value);
+                }}
+            >
                 <input
                     type={"text"}
                     className={style.search}
                     name="searchBox"
+                    id="searchBox"
                     placeholder="Căutați aici produse..."
                 />
                 <FontAwesomeIcon
@@ -40,7 +62,7 @@ function Header() {
                         document.body.style.overflowY = "scroll";
                     }}
                 />
-            </div>
+            </form>
         );
     }
     return (

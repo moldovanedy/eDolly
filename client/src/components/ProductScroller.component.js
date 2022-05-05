@@ -1,11 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faArrowCircleRight,
+    faArrowCircleLeft
+} from "@fortawesome/free-solid-svg-icons";
 
-// import defaultImage from "./../assets/images/Img_even_2.jpg";
 import "./../App.css";
 import style from "./../homepage.module.css";
-// import ProductCard from "./ProductCard";
 import render from "../pages/search/renderProducts";
 
 var defaultRequest = {
@@ -37,7 +40,7 @@ function ProductScroller(props) {
             <h2 style={{ marginLeft: "5%" }}>{props.title}</h2>
             <div className={style.productNavigator}>
                 <button
-                    className={style.buttonLeft}
+                    className={`${style.buttonLeft} ${style.button}`}
                     onClick={() => {
                         if (xPositionProducts < 0) {
                             var x = numberOfPixelsToScroll();
@@ -45,7 +48,7 @@ function ProductScroller(props) {
                         }
                     }}
                 >
-                    &lt;
+                    <FontAwesomeIcon icon={faArrowCircleLeft} />{" "}
                 </button>
 
                 <div
@@ -80,7 +83,7 @@ function ProductScroller(props) {
                 </div>
 
                 <button
-                    className={style.buttonRight}
+                    className={`${style.buttonRight} ${style.button}`}
                     onClick={() => {
                         if (xPositionProducts > -170 * 20) {
                             var x = numberOfPixelsToScroll();
@@ -88,7 +91,7 @@ function ProductScroller(props) {
                         }
                     }}
                 >
-                    &gt;
+                    <FontAwesomeIcon icon={faArrowCircleRight} />{" "}
                 </button>
             </div>
             <br />

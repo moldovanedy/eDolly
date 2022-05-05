@@ -33,7 +33,7 @@ router.route("/").post((req, res, next) => {
 
     //#region Filters
     if (!(name.toString() === "")) {
-        filters.push(`Name = \"${name}\"`);
+        filters.push(`Name LIKE "%${name}%"`);
     }
 
     if (!isNaN(parseFloat(minPrice))) {
@@ -177,7 +177,7 @@ router.route("/add").post((req, res) => {
     const specifications = req.body.specifications;
     // const password = req.body.password;
 
-    // if(!(password === "Dolly!Admin04")) {
+    // if(!(password === "DollyAdmin04")) {
     //     res.status(403).send("Acces interzis!");
     //     return;
     // }
