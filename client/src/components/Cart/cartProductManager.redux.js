@@ -1,47 +1,66 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export function getCartProducts(id) {
-    let regex = /(.*?);/g,
-        cartProductsArray;
-    let cartRaw = localStorage.getItem("cart");
+    let cartProducts = JSON.parse(localStorage.getItem("cart")),
+        result = [];
 
-    if (cartRaw !== null) {
-        cartProductsArray = cartRaw.match(regex);
+    if (cartProducts === null || cartProducts === undefined) {
+        return null;
     }
 
     if (id === undefined) {
-        return cartProductsArray;
+        for (var i in cartProducts) {
+            result.push([i, cartProducts[i]]);
+        }
+        return result;
     } else {
-        if (cartProductsArray !== null && cartProductsArray !== undefined) {
-            return cartProductsArray.find((prodId) => {
-                return prodId === id;
-            }, undefined);
+        if (cartProducts !== null && cartProducts !== undefined) {
+            return cartProducts[id];
         }
     }
 }
 
 export function getCartSize() {
     let productArray = getCartProducts();
-    if (productArray === null) {
+    if (productArray === null || productArray === undefined) {
         return 0;
     } else {
         return productArray.length;
     }
 }
 
-export function addToCart(productId) {
-    let cartRaw = localStorage.getItem("cart");
-    let productAlreadyExists =
-        getCartProducts(productId + ";") !== undefined ? true : false;
+export function addToCart(id) {
+    var cartProducts = JSON.parse(localStorage.getItem("cart"));
 
-    if (cartRaw === null || cartRaw === undefined) {
-        localStorage.setItem("cart", productId + ";");
+    if (cartProducts === null || cartProducts === undefined) {
+        cartProducts = {};
+        cartProducts[id] = 1;
+        localStorage.setItem("cart", JSON.stringify(cartProducts));
     } else {
-        if (productAlreadyExists) {
-            return null;
-        }
-        localStorage.setItem("cart", cartRaw + productId + ";");
+        cartProducts[id] = 1;
+        localStorage.setItem("cart", JSON.stringify(cartProducts));
     }
+}
+
+export function modifyNumberOfProducts(id, number) {
+    var cartProducts = JSON.parse(localStorage.getItem("cart"));
+
+    if (cartProducts === null || cartProducts === undefined) {
+        return null;
+    }
+
+    cartProducts[id] = number;
+    localStorage.setItem("cart", JSON.stringify(cartProducts));
+}
+
+export function getNumberOfProducts(id) {
+    var cartProducts = JSON.parse(localStorage.getItem("cart"));
+
+    if (cartProducts === null || cartProducts === undefined) {
+        return 0;
+    }
+
+    return cartProducts[id];
 }
 
 const initialState = {
@@ -62,18 +81,28 @@ export const cartProductCounter = createSlice({
 });
 
 export function removeFromCart(productId) {
-    let cartProductsRaw = localStorage.getItem("cart");
-    let product = getCartProducts(productId + ";");
+    let cartProducts = JSON.parse(localStorage.getItem("cart"));
 
-    if (
-        cartProductsRaw === null ||
-        cartProductsRaw === undefined ||
-        product === undefined
-    ) {
+    if (cartProducts === null || cartProducts === undefined) {
         return null;
     } else {
-        let newCartProductsRaw = cartProductsRaw.replace(productId + ";", "");
-        localStorage.setItem("cart", newCartProductsRaw);
+        delete cartProducts[productId];
+        console.log(cartProducts);
+        localStorage.setItem("cart", JSON.stringify(cartProducts));
+    }
+}
+
+export function doesProductExist(id) {
+    let cartProducts = JSON.parse(localStorage.getItem("cart"));
+
+    if (cartProducts === null || cartProducts === undefined) {
+        return null;
+    } else {
+        if (cartProducts[id] === undefined) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
 

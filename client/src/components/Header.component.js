@@ -23,9 +23,7 @@ function Header() {
                 name: name,
                 category: ""
             })
-            .then((res) => {
-                console.log(res.data);
-            })
+            .then((res) => {})
             .catch((err) => {
                 console.log(err);
             });

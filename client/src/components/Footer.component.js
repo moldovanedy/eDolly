@@ -7,8 +7,6 @@ function Footer() {
     return (
         <footer className={style.footer}>
             <Link to="/confidentialitate">Politica de confidențialitate</Link>
-            <p>Dolly</p>
-            <p>Bella</p>
         </footer>
     );
 }

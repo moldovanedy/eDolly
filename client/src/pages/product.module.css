@@ -49,6 +49,10 @@
     list-style-type: logo;
 }
 
+.activeButton {
+    background-color: #cf2525;
+}
+
 .productNavigation {
     width: 100%;
     background-color: #3b3bff;
@@ -71,6 +75,18 @@
     background-color: #6c6cff;
 }
 
+@media screen and (max-width: 920px) {
+    .firstPanel {
+        grid-template-columns: 400px;
+        grid-template-rows: auto auto 250px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .firstPanel {
+        grid-template-columns: 250px;
+    }
+}
 /* #endregion */
 
 .description {

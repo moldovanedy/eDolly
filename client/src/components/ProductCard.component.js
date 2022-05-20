@@ -29,6 +29,7 @@ function ProductCard(props) {
                                 removeFromFavourites(props.uuid);
                                 dispatch(decrement());
                             }
+                            document.location.reload();
                             e.preventDefault();
                             return false;
                         }}

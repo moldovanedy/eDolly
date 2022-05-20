@@ -17,22 +17,49 @@ namespace DatabaseRecordCorrection
                 MySqlConnection conn = new MySqlConnection(connStr);
                 conn.Open();
 
-                for (int i = 0; i < 1500; i++)
+                //remained at 1290
+                for (int i = 1290; i < 1500; i++)
                 {
                     string sql = $"SELECT BIN_TO_UUID(id) id, Reviews FROM products LIMIT {i + 1}, 1;";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     MySqlDataReader rdr = cmd.ExecuteReader();
 
                     string id = "", reviews = "";
-                    float rating = 0;
+                    double rating = 0;
 
                     //read the data
                     while (rdr.Read())
                     {
                         id = (string)rdr[0];
                         reviews = (string)rdr[1];
+                        bool isDone = false;
+                        int sum = 0, oneRating = 0, length = 0;
+                        while (!isDone)
+                        {
+                            int x = reviews.IndexOf("}");
+                            string rev = reviews.Substring(x - 1, 1);
+                            reviews = reviews.Substring(x + 1);
+                            try
+                            {
+                                int.TryParse(rev, out oneRating);
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("Ehe");
+                            }
 
-
+                            sum += oneRating;
+                            if(oneRating != 0)
+                            {
+                                length++;
+                            }
+                            if (!reviews.Contains("}"))
+                            {
+                                isDone = true;
+                                double result = (double)sum / (double)length;
+                                rating = Math.Round(result, 2);
+                            }
+                        }
                     }
                     rdr.Close();
 

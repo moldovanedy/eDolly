@@ -17,7 +17,11 @@ import {
     addToFavourites,
     removeFromFavourites
 } from "./../Cart/productManager.redux";
-import { addToCart, removeFromCart } from "./../Cart/cartProductManager.redux";
+import {
+    addToCart,
+    removeFromCart,
+    doesProductExist
+} from "./../Cart/cartProductManager.redux";
 import ProductImages from "./ProductImages.component";
 
 function MainPanel(props) {
@@ -50,6 +54,10 @@ function MainPanel(props) {
         pricePerMonth = (price / 36).toFixed(2); //credit for 3 years
     } else {
         pricePerMonth = (price / 60).toFixed(2); //credit for 5 years
+    }
+
+    if (doesProductExist(data.id) === true) {
+        cartButtonText = "Adăugat în coș";
     }
 
     return (
@@ -126,7 +134,11 @@ function MainPanel(props) {
                 </div>
                 <div style={{ gridColumn: "1 / 3" }}>
                     <button
-                        className={style.actionButtons}
+                        className={`${style.actionButtons} ${
+                            cartButtonText === "Adăugat în coș"
+                                ? style.activeButton
+                                : null
+                        }`}
                         onClick={() => {
                             var isAdded = addToCart(data.id);
                             if (isAdded !== null) {

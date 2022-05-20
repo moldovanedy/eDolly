@@ -4,14 +4,13 @@ import axios from "axios";
 import { Breadcrumb } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { useSelector } from "react-redux";
 
 import Header from "../../components/Header.component";
 import render from "./renderProducts";
 import Footer from "../../components/Footer.component";
 import style from "./searchResults.module.css";
 import Filters from "../../components/Filters.component";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     changeSortingRule,
     setProductsPerPage

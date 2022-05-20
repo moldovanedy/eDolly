@@ -14,10 +14,6 @@ function render(prod, filters = null, sort = null) {
     var i = 0;
     let isFavProduct = false;
 
-    if (filters !== null) {
-        console.log(filters);
-    }
-
     // console.log(prod.length);
 
     return prod.map((product) => {

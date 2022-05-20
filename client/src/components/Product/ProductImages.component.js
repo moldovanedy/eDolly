@@ -6,13 +6,28 @@ import {
     faArrowCircleRight,
     faArrowCircleLeft
 } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
 
 import style from "./productImages.module.css";
+import { show } from "./explorerOverlayManager.redux";
+import MediaExplorerOverlay from "./MediaExplorerOverlay.component";
 
 function ProductImages(props) {
     const [mediaNames, setMediaNames] = useState();
     var [xPositionProducts, setXPositionProducts] = useState(0);
-    var [xPositionSlider, setXPositionSlider] = useState(0);
+
+    var [translateAmount, setTranslateAmount] = useState(
+        window.innerWidth >= 425 ? 320 : 190
+    );
+
+    var [imageNumber, setImageNumber] = useState(0);
+
+    const dispatch = useDispatch();
+    var isExplorerOpen = useSelector((state) => state.explorer);
+
+    isExplorerOpen.value
+        ? (document.body.style.overflowY = "hidden")
+        : (document.body.style.overflowY = "auto");
 
     useEffect(() => {
         axios
@@ -25,6 +40,21 @@ function ProductImages(props) {
             });
     }, []);
 
+    window.addEventListener("resize", reportWindowSize);
+
+    function reportWindowSize() {
+        var width = window.innerWidth;
+        if (width >= 425) {
+            if (translateAmount !== 320) {
+                setTranslateAmount(320);
+            }
+        } else {
+            if (translateAmount !== 190) {
+                setTranslateAmount(190);
+            }
+        }
+    }
+
     return (
         <div className={style.mainMediaContainer}>
             <div className={style.imageContainer}>
@@ -32,7 +62,9 @@ function ProductImages(props) {
                     className={style.imageSliderButton}
                     onClick={() => {
                         if (xPositionProducts < 0) {
-                            setXPositionProducts(xPositionProducts + 320);
+                            setXPositionProducts(
+                                xPositionProducts + translateAmount
+                            );
                         }
                     }}
                 >
@@ -65,9 +97,10 @@ function ProductImages(props) {
                                             return media ===
                                                 "thumbnail.png" ? null : (
                                                 <img
-                                                    width={300}
-                                                    height={500}
+                                                    className={style.images}
                                                     key={index}
+                                                    onClick={() => {dispatch(show()); setImageNumber(index)}}
+                                                    style={{cursor: "pointer"}}
                                                     src={`http://localhost:5000/assets/${props.productName}/${media}`}
                                                     alt={`Imaginea ${index}`}
                                                 />
@@ -89,7 +122,7 @@ function ProductImages(props) {
                                                     />
                                                     Ne pare rău, se pare că
                                                     browser-ul dvs. nu suportă
-                                                    videoclipuri.
+                                                    videoclipuri sau a apărut o eroare neașteptată.
                                                     <br /> `Video ${index}`
                                                 </video>
                                             );
@@ -122,66 +155,23 @@ function ProductImages(props) {
                             xPositionProducts >
                             -320 * (mediaNames.length - 2)
                         ) {
-                            setXPositionProducts(xPositionProducts - 320);
+                            setXPositionProducts(
+                                xPositionProducts - translateAmount
+                            );
                         }
                     }}
                 >
                     <FontAwesomeIcon icon={faArrowCircleRight} />{" "}
                 </button>
             </div>
-            <br />
-            <div className={style.imageContainer}>
-                <button
-                    style={{ width: "20px", height: "30px" }}
-                    className={style.imageSliderButton}
-                    onClick={() => {
-                        if (xPositionSlider < 0) {
-                            setXPositionSlider(xPositionSlider + 330);
-                        }
-                    }}
-                >
-                    <FontAwesomeIcon icon={faArrowCircleLeft} />{" "}
-                </button>
-                <div className={style.imgCarousel}>
-                    <div
-                        className={style.carouselSlider}
-                        style={{
-                            transform:
-                                "translate(" + xPositionSlider + "px, 0px)"
-                        }}
-                    >
-                        {mediaNames !== null && mediaNames !== undefined
-                            ? mediaNames.map(
-                                  (
-                                      img,
-                                      index
-                                  ) => /* prettier-ignore */ {
-                                    return img === "thumbnail.png" ? null : (
-                                        <img
-                                            width={80}
-                                            height={100}
-                                            key={index + 1000}
-                                            src={`http://localhost:5000/assets/${props.productName}/${img}`}
-                                            alt={`Buton pentru imaginea ${index}`}
-                                        />
-                                    );
-                                }
-                              )
-                            : null}
-                    </div>
-                </div>
-                <button
-                    style={{ width: "20px", height: "30px" }}
-                    className={style.imageSliderButton}
-                    onClick={() => {
-                        if (xPositionSlider > -330 * (mediaNames.length - 2)) {
-                            setXPositionSlider(xPositionSlider - 330);
-                        }
-                    }}
-                >
-                    <FontAwesomeIcon icon={faArrowCircleRight} size={"sm"} />{" "}
-                </button>
-            </div>
+
+            {isExplorerOpen.value ? (
+                <MediaExplorerOverlay
+                    componentData={mediaNames}
+                    productName={props.productName}
+                    imageNumber={imageNumber}
+                />
+            ) : null}
         </div>
     );
 }
