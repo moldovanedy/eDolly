@@ -120,8 +120,6 @@ function Filters() {
                 </Form.Group>
 
                 <Form.Group>
-                    <h5 className={style.labels}>Preț</h5>
-
                     <h5 className={style.labels}>Preț minim</h5>
                     <Form.Control
                         id="minimumPrice"

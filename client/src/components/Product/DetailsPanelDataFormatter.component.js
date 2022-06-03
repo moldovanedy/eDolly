@@ -79,6 +79,23 @@ export function RenderReviews(props) {
         reviews.push(separated[i] + "}" + separated[i + 1] + "}");
     }
 
+    //writes review text with <br /> tags
+    function writeReview(text) {
+        var lines = text.split(/[\n]/gm);
+        return (
+            <p className={style.reviewText}>
+                {lines.map((line, index) => {
+                    return (
+                        <>
+                            {line}
+                            <br />
+                        </>
+                    );
+                })}
+            </p>
+        );
+    }
+
     return (
         <section>
             {reviews.map((rev, index) => {
@@ -121,12 +138,7 @@ export function RenderReviews(props) {
                             <b>{rating}</b>
                         </p>
                         <br />
-                        <p
-                            className={style.reviewText}
-                            style={{ textIndent: "25px" }}
-                        >
-                            {text}
-                        </p>
+                        {writeReview(text)}
                     </div>
                 );
             })}

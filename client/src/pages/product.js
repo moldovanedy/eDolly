@@ -19,13 +19,6 @@ function Product() {
     var [isDone, setIsDone] = useState(false);
 
     var title = isDone ? data[0].Name : "";
-    let reducedTitle = title.substring(0, 57);
-    let displayTitle;
-    if (title.length > reducedTitle.length) {
-        displayTitle = reducedTitle + "...";
-    } else {
-        displayTitle = title;
-    }
 
     useEffect(() => {
         axios
@@ -43,7 +36,7 @@ function Product() {
                 <>
                     <Helmet>
                         <link rel="icon" href={icon} />
-                        <title>{displayTitle}</title>
+                        <title>{title}</title>
                         <meta property="og:title" content={title} />
                         <meta property="og:type" content="website" />
                         <meta

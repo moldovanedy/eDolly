@@ -1,4 +1,7 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 import style from "./../../pages/product.module.css";
 import {
@@ -28,6 +31,17 @@ function DetailsPanel(props) {
                 <div id="recenzii">
                     <h2>Recenzii</h2>
                     <RenderReviews rawData={data.Reviews} />
+                    {/* let title to be the whole product name, don't truncate (no other site truncates) */}
+                    <br />
+                    <Link
+                        to={`/recenzie-produs/${data.id}`}
+                        className={style.addReviewButton}
+                    >
+                        Adăugați o recenzie{" "}
+                        <FontAwesomeIcon icon={faPlusCircle} />
+                    </Link>
+                    <br />
+                    <br />
                 </div>
             </div>
         </>

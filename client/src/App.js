@@ -3,14 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Homepage from "./Homepage";
 import Err404 from "./404";
-//import TemporarProdus from "./TemporarProdus";
 import Cart from "./pages/cart";
 import FavouriteProducts from "./pages/favouriteProducts";
 import PrivacyPolicy from "./pages/help/PrivacyPolicy";
 import SearchResults from "./pages/search/searchResults";
 import Product from "./pages/product";
-
-//import { productArray } from "./components/ProductCategories";
+import AddReview from "./pages/addReview";
 
 function App() {
     return (
@@ -19,21 +17,19 @@ function App() {
                 <Route path="/" exact element={<Homepage />} />
                 <Route path="/cos-de-cumparaturi" exact element={<Cart />} />
                 <Route path="/favorite" exact element={<FavouriteProducts />} />
-                {/* {productArray.map((product, index) => {
-                    return (
-                        <Route
-                            key={index}
-                            path={`/produse/${product}`}
-                            element={<SearchResults />}
-                        />
-                    );
-                })} */}
+
                 <Route
                     path={`/produse/:categorie`}
-                    element={<SearchResults />}
+                    element={<SearchResults mode="category" />}
+                />
+
+                <Route
+                    path={`/cautare/:productName`}
+                    element={<SearchResults mode="name" />}
                 />
 
                 <Route path={"/produs/:id"} element={<Product />} />
+                <Route path={"/recenzie-produs/:id"} element={<AddReview />} />
 
                 <Route
                     path="/confidentialitate"

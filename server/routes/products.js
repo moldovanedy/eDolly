@@ -271,6 +271,47 @@ function createThumbnail(path) {
     });
 }
 
+router.route("/addReview").post((req, res) => {
+    const id = req.body.id;
+    const name = req.body.name;
+    const review = req.body.review;
+    const rating = req.body.rating;
+
+    var rawReviews;
+
+    pool.query(
+        `SELECT Reviews FROM products WHERE id = UUID_TO_BIN('${id}')`,
+        (err, result, fileds) => {
+            if (err) {
+                console.log(err);
+                res.send("Eroare!");
+            } else {
+                rawReviews = result[0].Reviews;
+
+                if (rawReviews === undefined) {
+                    rawReviews = `[${name}]:{{${rating}}${review}}`;
+                } else {
+                    rawReviews = rawReviews.concat(
+                        `[${name}]:{{${rating}}${review}}`
+                    );
+                }
+
+                pool.query(
+                    `UPDATE products SET Reviews = '${rawReviews}' WHERE id = UUID_TO_BIN('${id}')`,
+                    (err, result, fields) => {
+                        if (err) {
+                            res.send("Eroare la server! Eroare: " + err);
+                            console.error("Eroare: " + err);
+                        } else {
+                            res.send("Succes!");
+                        }
+                    }
+                );
+            }
+        }
+    );
+});
+
 /**
  * @description finds a product by id
  */

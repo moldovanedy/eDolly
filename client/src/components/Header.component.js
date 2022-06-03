@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import style from "./../main.module.css";
 import logo from "../logo.svg";
 import Navigation from "./Navigation.component";
-import axios from "axios";
 
 function Header() {
     const [searchBoxActive, setSearchBoxActive] = useState(false);
@@ -18,15 +17,7 @@ function Header() {
     var cartSize = useSelector((state) => state.cartProducts.value);
 
     function search(name) {
-        axios
-            .post("http://localhost:5000/products", {
-                name: name,
-                category: ""
-            })
-            .then((res) => {})
-            .catch((err) => {
-                console.log(err);
-            });
+        document.location.replace(`http://localhost:3000/cautare/${name}`);
     }
 
     function SearchBox() {
@@ -40,6 +31,7 @@ function Header() {
             >
                 <input
                     type={"text"}
+                    autoFocus
                     className={style.search}
                     name="searchBox"
                     id="searchBox"

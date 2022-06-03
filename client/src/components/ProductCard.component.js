@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { increment, decrement } from "./Cart/productManager.redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 
 import style from "./../homepage.module.css";
 import {
@@ -13,6 +13,19 @@ import {
 
 function ProductCard(props) {
     const dispatch = useDispatch();
+
+    var rating = props.rating,
+        productRating;
+
+    if (rating === null) {
+        rating = 0;
+        productRating = 0;
+    } else if (rating >= 1 && rating <= 5) {
+        productRating = Math.round(rating);
+    } else {
+        rating = 0;
+        productRating = 0;
+    }
 
     return (
         <Link to={`/produs/${props.uuid}`}>
@@ -56,7 +69,26 @@ function ProductCard(props) {
                 <div style={{ textAlign: "center" }}>{props.name}</div>
                 <div style={{ position: "absolute", marginTop: "130%" }}>
                     <div style={{ fontSize: "14px" }}>
-                        &#10004;&#10004;&#10004;&#10004;&#10005;
+                        <FontAwesomeIcon
+                            icon={faStar}
+                            color={productRating >= 1 ? "#e0d91c" : "#333"}
+                        />{" "}
+                        <FontAwesomeIcon
+                            icon={faStar}
+                            color={productRating >= 2 ? "#e0d91c" : "#333"}
+                        />{" "}
+                        <FontAwesomeIcon
+                            icon={faStar}
+                            color={productRating >= 3 ? "#e0d91c" : "#333"}
+                        />{" "}
+                        <FontAwesomeIcon
+                            icon={faStar}
+                            color={productRating >= 4 ? "#e0d91c" : "#333"}
+                        />{" "}
+                        <FontAwesomeIcon
+                            icon={faStar}
+                            color={productRating === 5 ? "#e0d91c" : "#333"}
+                        />{" "}
                     </div>
                     <div>
                         <div>

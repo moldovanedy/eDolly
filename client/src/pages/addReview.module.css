@@ -1,0 +1,80 @@
+.rules {
+    width: 95%;
+    border-radius: 10px;
+}
+
+.form {
+    margin-left: 30px;
+    position: relative;
+}
+
+label {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#name {
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+#review {
+    font-size: 20px;
+    position: relative;
+    width: 95%;
+    max-width: 1000px;
+    height: 300px;
+    resize: both;
+    white-space: pre-wrap;
+}
+
+.submitButton {
+    background-color: #0ef319;
+    padding: 5px 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.submitButton:hover {
+    background-color: #c6e7c8;
+}
+
+.dialogParent {
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #5050508e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reviewPostedDialog {
+    background-color: #fff;
+    max-width: 80%;
+    border-radius: 12px;
+}
+
+.reviewPostedDialog p {
+    font-size: 22px;
+    padding: 10px;
+}
+
+.reviewPostedDialog button {
+    float: right;
+    padding: 5px 30px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #0ef319;
+    transition: all 0.3s ease-in-out;
+}
+
+.reviewPostedDialog button:hover {
+    background-color: #c6e7c8;
+}

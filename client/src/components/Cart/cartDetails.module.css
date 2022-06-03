@@ -1,7 +1,7 @@
 .mainContainer {
     margin: 20px;
     margin-bottom: 90px;
-    width: 1200px;
+    width: 95%;
     max-width: 1200px;
     background-color: #c3c9e6;
     border-radius: 10px;
@@ -12,6 +12,13 @@
     grid-template-columns: 50% 20% 30%;
     background-color: #d8dae6;
     margin: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .productDetails {
+        grid-template-columns: auto;
+        grid-template-rows: 60% 20% 15%;
+    }
 }
 
 .centerAlign {

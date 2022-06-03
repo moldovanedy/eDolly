@@ -20,6 +20,10 @@
     width: 70%;
 }
 
+.sortingTab div {
+    display: inline;
+}
+
 .dropdown {
     background-color: #f1f1f1;
     border: 1px solid #c7c7c7;
@@ -31,6 +35,13 @@
 .labels {
     margin-left: 5px;
     font-size: 18px;
+}
+
+/* override bootstrap labels for product avaiablility */
+.labels label {
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: normal;
 }
 
 .applyFiltersButton {
@@ -64,4 +75,22 @@
 
 .mainContainerSearch a div:hover {
     background-color: #dddce9;
+}
+
+@media screen and (max-width: 768px) {
+    .sortingTab div {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .sortingTab {
+        width: 95%;
+    }
+
+    .sortingTab select {
+        display: block;
+        margin-left: 30px;
+        max-width: 120px;
+    }
 }

@@ -67,23 +67,23 @@ function MainPanel(props) {
                 <span>
                     <FontAwesomeIcon
                         icon={faStar}
-                        color={productRating >= 1 ? "#ff0" : "#333"}
+                        color={productRating >= 1 ? "#e0d91c" : "#333"}
                     />{" "}
                     <FontAwesomeIcon
                         icon={faStar}
-                        color={productRating >= 2 ? "#ff0" : "#333"}
+                        color={productRating >= 2 ? "#e0d91c" : "#333"}
                     />{" "}
                     <FontAwesomeIcon
                         icon={faStar}
-                        color={productRating >= 3 ? "#ff0" : "#333"}
+                        color={productRating >= 3 ? "#e0d91c" : "#333"}
                     />{" "}
                     <FontAwesomeIcon
                         icon={faStar}
-                        color={productRating >= 4 ? "#ff0" : "#333"}
+                        color={productRating >= 4 ? "#e0d91c" : "#333"}
                     />{" "}
                     <FontAwesomeIcon
                         icon={faStar}
-                        color={productRating === 5 ? "#ff0" : "#333"}
+                        color={productRating === 5 ? "#e0d91c" : "#333"}
                     />{" "}
                 </span>
                 <span>{rating}</span>

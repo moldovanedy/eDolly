@@ -79,6 +79,7 @@ function render(prod, filters = null, sort = null) {
                         ? productPriceRemainder
                         : parseFloat(productPriceRemainder).toFixed(0)
                 }
+                rating={product.Rating}
                 imgUrl={imageUrl}
                 uuid={product.id}
                 isFavourite={isFavProduct}

@@ -18,17 +18,27 @@ import {
 import logo from "./../../assets/icons/favicon.ico";
 import ProductCardPlaceholder from "../../components/Product/ProductCardPlaceholder.component";
 
-function SearchResults() {
+function SearchResults(props) {
     var { categorie } = useParams();
+    var { productName } = useParams();
+
+    var prodName = "",
+        categ = "";
+
+    if (props.mode === "name") {
+        prodName = productName;
+    } else if (props.mode === "category") {
+        categ = categorie;
+    }
 
     const dispatch = useDispatch();
 
     var defaultRequest = {
-        name: "",
+        name: prodName,
         minPrice: 0,
         maxPrice: 1000000,
         isInStock: true,
-        category: categorie,
+        category: categ,
         number: 100
     };
 
@@ -87,7 +97,11 @@ function SearchResults() {
     return (
         <>
             <Helmet>
-                <title>{categorie}</title>
+                <title>
+                    {props.mode === "category"
+                        ? categorie
+                        : `Rezultatele căutării pentru "${prodName}"`}
+                </title>
                 <link rel="icon" href={logo} />
             </Helmet>
             <Header />
@@ -104,35 +118,42 @@ function SearchResults() {
                 }}
             >
                 <div className={style.sortingTab}>
-                    <h2>{categorie}</h2>
+                    <h2>
+                        {props.mode === "name"
+                            ? `Rezultatele căutării pentru "${prodName}"`
+                            : `${categ}`}
+                    </h2>
                     <br />
                     <hr />
-
-                    <span style={{ marginLeft: "7px" }}>Sortați după: </span>
-                    <select
-                        defaultValue={"random"}
-                        onChange={onChangeSortingRule}
-                        className={style.dropdown}
-                    >
-                        <option>Relevanță</option>
-                        <option>Preț crescător</option>
-                        <option>Preț descrescător</option>
-                        <option>Reducere (%)</option>
-                    </select>
-
-                    <span style={{ marginLeft: "30px" }}>
-                        Produse pe pagină:{" "}
-                    </span>
-                    <select
-                        onChange={onChangeProductsPerPage}
-                        defaultValue={100}
-                        className={style.dropdown}
-                    >
-                        <option>60</option>
-                        <option>80</option>
-                        <option>100</option>
-                    </select>
-
+                    <div>
+                        <span style={{ marginLeft: "30px" }}>
+                            Sortați după:{" "}
+                        </span>
+                        <select
+                            defaultValue={"random"}
+                            onChange={onChangeSortingRule}
+                            className={style.dropdown}
+                        >
+                            <option>Relevanță</option>
+                            <option>Preț crescător</option>
+                            <option>Preț descrescător</option>
+                            <option>Reducere (%)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span style={{ marginLeft: "30px" }}>
+                            Produse pe pagină:{" "}
+                        </span>
+                        <select
+                            onChange={onChangeProductsPerPage}
+                            defaultValue={100}
+                            className={style.dropdown}
+                        >
+                            <option>60</option>
+                            <option>80</option>
+                            <option>100</option>
+                        </select>
+                    </div>
                     <br />
                     <br />
                 </div>

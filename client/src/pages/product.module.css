@@ -132,7 +132,8 @@
 .reviewCard {
     background-color: #fff;
     margin: auto;
-    width: 1000px;
+    max-width: 1000px;
+    width: 95%;
     border-radius: 20px;
     box-shadow: 2px 2px 3px #979797;
 }
@@ -140,6 +141,24 @@
 .reviewText {
     margin-left: 20px;
     font-family: "Times New Roman", Times, serif;
+}
+
+.addReviewButton {
+    text-decoration: none;
+    margin-left: 40px;
+    font-size: 22px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: #170372;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.addReviewButton:hover {
+    color: #fff; /* to prevent text color turning blue */
+    border-radius: 50px;
+    background-color: #554e75;
 }
 
 /* #endregion */
