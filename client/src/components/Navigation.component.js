@@ -59,11 +59,11 @@ function Navigation() {
                                                         key={index}
                                                     >
                                                         <Link
-                                                            to={`/produse/${subItem}`}
+                                                            to={`/produse=${subItem}/pag=1`}
                                                             onClick={() => {
                                                                 //ugly, but works :)
                                                                 window.location.pathname.contains(
-                                                                    "/produse/"
+                                                                    "/produse="
                                                                 )
                                                                     ? window.location.reload()
                                                                     : doNothing();

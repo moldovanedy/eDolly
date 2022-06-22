@@ -9,6 +9,7 @@ import PrivacyPolicy from "./pages/help/PrivacyPolicy";
 import SearchResults from "./pages/search/searchResults";
 import Product from "./pages/product";
 import AddReview from "./pages/addReview";
+import OrderDetails from "./pages/orderDetails";
 
 function App() {
     return (
@@ -17,14 +18,15 @@ function App() {
                 <Route path="/" exact element={<Homepage />} />
                 <Route path="/cos-de-cumparaturi" exact element={<Cart />} />
                 <Route path="/favorite" exact element={<FavouriteProducts />} />
+                <Route path="/comanda" exact element={<OrderDetails />} />
 
                 <Route
-                    path={`/produse/:categorie`}
+                    path={`/produse=:categorie/pag=:page`}
                     element={<SearchResults mode="category" />}
                 />
 
                 <Route
-                    path={`/cautare/:productName`}
+                    path={`/cautare=:productName/pag=:page`}
                     element={<SearchResults mode="name" />}
                 />
 
@@ -36,6 +38,7 @@ function App() {
                     exact
                     element={<PrivacyPolicy />}
                 />
+
                 <Route path="*" element={<Err404 />} />
             </Routes>
         </Router>

@@ -1,0 +1,23 @@
+p {
+    margin-left: 5px;
+}
+
+.table {
+    border: 2px solid #333;
+    border-collapse: collapse;
+    max-width: 95%;
+    margin-left: 10px;
+}
+
+.table tr th {
+    border: 1px solid #333;
+    border-bottom: 2px solid #333;
+    border-right: 2px solid #333;
+    height: 30px;
+    background-color: #d3d3d3;
+}
+
+.table tr td {
+    border: 1px solid #333;
+    border-right: 2px solid #333;
+}

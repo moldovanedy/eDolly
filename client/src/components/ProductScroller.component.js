@@ -17,7 +17,8 @@ var defaultRequest = {
     maxPrice: 1000000,
     isInStock: true,
     category: "",
-    number: 20
+    number: 20,
+    page: 1
 };
 
 function numberOfPixelsToScroll() {

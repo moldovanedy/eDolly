@@ -14,8 +14,6 @@ function render(prod, filters = null, sort = null) {
     var i = 0;
     let isFavProduct = false;
 
-    // console.log(prod.length);
-
     return prod.map((product) => {
         if (product.Name.length > 40) {
             productName = product.Name.substring(0, 40) + "...";

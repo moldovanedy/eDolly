@@ -47,11 +47,17 @@
     font-size: 24px;
     color: #fff;
     transition: all 0.3s ease-in;
+    text-decoration: none;
 }
 
 .continueOrderBtn:hover {
     background-color: #c3c9e6;
     color: #000;
+}
+
+.totalPriceDisplay {
+    font-weight: bold;
+    margin: 10px;
 }
 
 .footer {

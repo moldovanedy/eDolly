@@ -17,7 +17,9 @@ function Header() {
     var cartSize = useSelector((state) => state.cartProducts.value);
 
     function search(name) {
-        document.location.replace(`http://localhost:3000/cautare/${name}`);
+        document.location.replace(
+            `http://localhost:3000/cautare=${name}/pag=1`
+        );
     }
 
     function SearchBox() {

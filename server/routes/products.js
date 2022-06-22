@@ -26,6 +26,7 @@ router.route("/").post((req, res, next) => {
     const isInStock = req.body.isInStock;
     const category = req.body.category;
     const number = parseFloat(req.body.number);
+    var page = parseInt(req.body.page);
 
     var query =
         "SELECT BIN_TO_UUID(id) id, Name, Price, OldPrice, Category, Rating FROM products WHERE ";
@@ -69,18 +70,87 @@ router.route("/").post((req, res, next) => {
         }
     }
 
+    var shouldSearch = true;
+
+    if (isNaN(parseInt(page)) || page === undefined || page === null) {
+        page = 1;
+    } else if (parseInt(page) > 15) {
+        res.send([]);
+        shouldSearch = false;
+    }
+
     if (!isNaN(parseFloat(number))) {
-        query += " LIMIT " + number;
+        query += " LIMIT " + number * (page - 1) + ", " + number;
+    } else {
+        query += " LIMIT 100";
+    }
+
+    if (shouldSearch) {
+        pool.query(query, (err, result, fields) => {
+            if (err) {
+                res.send("Oops! Ceva nu a funcționat corect!");
+                console.error("Eroare: " + err);
+            } else {
+                res.send(result);
+                next();
+            }
+        });
+    }
+});
+
+router.route("/getNumberOfProducts").post((req, res) => {
+    const name = req.body.name;
+    const minPrice = parseFloat(req.body.minPrice);
+    const maxPrice = parseFloat(req.body.maxPrice);
+    const isInStock = req.body.isInStock;
+    const category = req.body.category;
+
+    var filters = [],
+        query = `SELECT COUNT(*) FROM products WHERE `;
+
+    //#region Filters
+    if (!(name.toString() === "")) {
+        filters.push(`Name LIKE "%${name}%"`);
+    }
+
+    if (!isNaN(parseFloat(minPrice))) {
+        filters.push(`Price >= ${minPrice}`);
+    }
+
+    if (!isNaN(parseFloat(maxPrice))) {
+        filters.push(`Price <= ${maxPrice}`);
+    }
+
+    //if true, returns only products in stock;
+    //if false, returns both products in stock and products out of stock
+    if (isInStock === true) {
+        filters.push(`Stock > 0`);
+    }
+
+    if (!(category.toString() === "")) {
+        filters.push(`Category = \"${category}\"`);
+    }
+    //#endregion
+
+    if (filters.length === 0) return;
+    if (filters.length === 1) {
+        query += filters[0];
+    } else {
+        for (i = 0; i < filters.length; i++) {
+            if (!(i === filters.length - 1)) {
+                //if it's not the last element
+                query += filters[i] + " AND ";
+            } else {
+                query += filters[i];
+            }
+        }
     }
 
     pool.query(query, (err, result, fields) => {
         if (err) {
-            res.send("Oops! Ceva nu a funcționat corect!");
-            console.error("Eroare: " + err);
-        } else {
-            res.send(result);
-            next();
+            res.send("Eroare!");
         }
+        res.send(result);
     });
 });
 

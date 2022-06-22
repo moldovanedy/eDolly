@@ -10,6 +10,17 @@ import {
 
 function CartDetails(props) {
     var productData = props.products;
+
+    function calculateTotal() {
+        let total = 0;
+        for (let i = 0; i < productData.length; i++) {
+            total +=
+                productData[i].Price * getNumberOfProducts(productData[i].id);
+        }
+
+        return total.toFixed(2);
+    }
+
     return (
         <div className={style.centerAlign}>
             <div className={style.mainContainer}>
@@ -32,8 +43,12 @@ function CartDetails(props) {
                                         {product.Name}
                                     </p>
                                 </Link>
+                                <b>{`${product.Price} Lei / bucată`}</b>
                             </div>
-                            <div className={style.centerAlign}>
+                            <div
+                                className={style.centerAlign}
+                                style={{ marginTop: "20px" }}
+                            >
                                 <input
                                     type={"number"}
                                     style={{ width: "50px" }}
@@ -62,7 +77,12 @@ function CartDetails(props) {
                                         fontWeight: "bold"
                                     }}
                                 >
-                                    {product.Price} Lei
+                                    {(
+                                        product.Price *
+                                        getNumberOfProducts(product.id)
+                                    ).toFixed(2)}{" "}
+                                    Lei
+                                    {/* price * the number of products */}
                                 </p>
                                 <button
                                     onClick={() => {
@@ -77,11 +97,34 @@ function CartDetails(props) {
                         </div>
                     );
                 })}
+                <div
+                    className={style.productDetails}
+                    style={{ display: "inline" }}
+                >
+                    <span
+                        className={style.totalPriceDisplay}
+                        style={{
+                            float: "left",
+                            fontSize: "28px"
+                        }}
+                    >
+                        TOTAL:
+                    </span>
+                    <span
+                        className={style.totalPriceDisplay}
+                        style={{
+                            float: "right",
+                            fontSize: "24px"
+                        }}
+                    >
+                        {calculateTotal()} Lei
+                    </span>
+                </div>
             </div>
             <footer className={style.footer}>
-                <button className={style.continueOrderBtn}>
+                <Link to={"/comanda"} className={style.continueOrderBtn}>
                     Continuă &gt; &gt;
-                </button>
+                </Link>
             </footer>
         </div>
     );
