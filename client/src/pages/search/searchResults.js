@@ -4,6 +4,8 @@ import axios from "axios";
 import { Breadcrumb, Pagination } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import Header from "../../components/Header.component";
 import render from "./renderProducts";
@@ -56,6 +58,12 @@ function SearchResults(props) {
 
     var [isDone, setIsDone] = useState(false);
     var [shouldShowPagination, setShouldShowPagination] = useState(true);
+
+    var [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    window.onresize = () => {
+        setWindowWidth(window.innerWidth);
+    };
 
     //<sorting>
     function onChangeSortingRule(e) {
@@ -170,8 +178,15 @@ function SearchResults(props) {
                     <br />
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <div className={style.mainContent}>
-                        <Filters />
+                    <div
+                        className={style.mainContent}
+                        style={
+                            windowWidth < 600
+                                ? { gridTemplateColumns: "auto" }
+                                : null
+                        }
+                    >
+                        {windowWidth > 600 ? <Filters /> : <OpenFilters />}
 
                         <main className={style.mainContainerSearch}>
                             {useEffect(() => {
@@ -280,7 +295,6 @@ function PaginationManager(props) {
         .then((res) => {
             setNumberOfProducts(parseInt(res.data[0]["COUNT(*)"]));
             setIsDone(true);
-            console.log(pagesRequired);
         });
 
     let items = [1, 2, 3, 4, 5];
@@ -363,6 +377,54 @@ function navigateToPage(page) {
     var currentPageUrlIndex = currentUrl.indexOf("pag=");
     document.location.replace(
         currentUrl.substring(0, currentPageUrlIndex) + `pag=${page}`
+    );
+}
+
+function OpenFilters() {
+    var [isOpen, setIsOpen] = useState(false);
+
+    if (isOpen) {
+        document.body.style.overflowY = "hidden";
+    } else {
+        document.body.style.overflowY = "auto";
+    }
+
+    return (
+        <>
+            <button
+                onClick={() => {
+                    setIsOpen(true);
+                }}
+                className={style.filterButton}
+            >
+                <FontAwesomeIcon icon={faFilter} />
+                Filtre
+            </button>
+
+            <div
+                className={
+                    isOpen
+                        ? style.filtersOnCenterScreen
+                        : style.filtersOnCenterScreen + " " + style.hide
+                }
+            >
+                <FontAwesomeIcon
+                    icon={faTimes}
+                    size="3x"
+                    style={{
+                        position: "absolute",
+                        top: "1%",
+                        right: "10%",
+                        color: "#fff",
+                        cursor: "pointer"
+                    }}
+                    onClick={() => {
+                        setIsOpen(false);
+                    }}
+                />
+                <Filters />
+            </div>
+        </>
     );
 }
 

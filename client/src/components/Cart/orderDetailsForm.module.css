@@ -43,3 +43,7 @@
     background-color: #c3c9e6;
     color: #000;
 }
+
+.errors {
+    color: #f00;
+}

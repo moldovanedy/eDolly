@@ -1,6 +1,6 @@
 import React from "react";
 
-import defaultImage from "./../../assets/images/Img_even_2.jpg";
+import defaultImage from "./../../assets/images/imgNotFound.jpg";
 import ProductCard from "../../components/ProductCard.component";
 import { getFavouriteProducts } from "../../components/Cart/productManager.redux";
 
@@ -57,9 +57,9 @@ function render(prod, filters = null, sort = null) {
         if (filters !== null) {
             if (
                 product.Price < filters.minPrice ||
-                product.Price > filters.maxPrice
-                // product.Rating < filters.minRating ||
-                // product.Rating > filters.maxRating
+                product.Price > filters.maxPrice ||
+                product.Rating < filters.minRating ||
+                product.Rating > filters.maxRating
             ) {
                 return null;
             }
