@@ -11,6 +11,9 @@ import Product from "./pages/product";
 import AddReview from "./pages/addReview";
 import OrderDetails from "./pages/orderDetails";
 
+import Register from "./pages/auth/register";
+import Login from "./pages/auth/login";
+
 function App() {
     return (
         <Router>
@@ -19,6 +22,9 @@ function App() {
                 <Route path="/cos-de-cumparaturi" exact element={<Cart />} />
                 <Route path="/favorite" exact element={<FavouriteProducts />} />
                 <Route path="/comanda" exact element={<OrderDetails />} />
+
+                <Route path="/creare-cont" exact element={<Register />} />
+                <Route path="/logare" exact element={<Login />} />
 
                 <Route
                     path={`/produse=:categorie/pag=:page`}

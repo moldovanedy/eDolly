@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import style from "./productImages.module.css";
 import { show } from "./explorerOverlayManager.redux";
+import videoPlaceholder from "./../../assets/images/Video.png";
+import obj3dPlaceholder from "./../../assets/images/3dObject.png";
 
 function MediaExplorerOverlay(props) {
     const dispatch = useDispatch();
+    var [selectedMedia, setSelectedMedia] = useState("image"); //can be image, video, or 3d
 
     var mediaNames = props.componentData;
 
@@ -13,8 +16,26 @@ function MediaExplorerOverlay(props) {
         document.getElementById("explorer").style.opacity = 1;
     });
 
-    function changeMainMedia(index) {
-        var mediaElement = document.getElementById("theMediaElement");
+    function changeMainMedia(index, mediaType) {
+        var mediaElement = document.getElementById("theImageElement"); //default
+        switch (selectedMedia) {
+            case "image":
+                mediaElement = document.getElementById("theImageElement");
+                break;
+            case "video":
+                mediaElement = document.getElementById("theVideoElement");
+                break;
+            case "3d":
+                mediaElement = document.getElementById("the3dElement");
+                break;
+            default:
+                mediaElement = document.getElementById("theImageElement");
+        }
+        setSelectedMedia(mediaType);
+
+        if (mediaElement === null || mediaElement === undefined) {
+            return;
+        }
 
         //for fading effect
         mediaElement.style.transition = "none";
@@ -29,7 +50,10 @@ function MediaExplorerOverlay(props) {
 
         //for changing border to active element
         for (var i = 0; i < mediaNames.length; i++) {
-            document.getElementById(`buttonElement${i}`).style.border = "none";
+            var el = document.getElementById(`buttonElement${i}`);
+            if (el !== null) {
+                el.style.border = "none";
+            }
         }
 
         var buttonElement = document.getElementById(`buttonElement${index}`);
@@ -62,11 +86,11 @@ function MediaExplorerOverlay(props) {
                     {mediaNames !== null && mediaNames !== undefined
                         ? mediaNames.map(
                               (
-                                  img,
+                                  media,
                                   index
                               ) => /* prettier-ignore */ {
-                                    var dotPosition = img.search(/[.]/g);
-                                    var ext = img.substring(dotPosition + 1);
+                                    var dotPosition = media.search(/[.]/g);
+                                    var ext = media.substring(dotPosition + 1);
                                     switch (ext) {
                                         case "jpg":
                                         case "jpeg":
@@ -75,35 +99,49 @@ function MediaExplorerOverlay(props) {
                                         case "bmp":
                                         case "tif":
                                         case "tiff":
-                                            return <img
-                                            width={80}
-                                            height={100}
-                                            id={`buttonElement${index}`}
-                                            style={props.imageNumber === index ?
-                                            {border: "6px solid #727272", margin: "10px", borderRadius: "5px"}
-                                            : {margin: "10px", borderRadius: "5px"}}
-                                            key={index + 1000}
-                                            onClick={() => {changeMainMedia(index)}}
-                                            src={`http://localhost:5000/assets/${props.productName}/${img}`}
-                                            alt={`Buton pentru imaginea ${index}`}
-                                        />
+                                            return media === "thumbnail.png" ? null : 
+                                            (<img
+                                                width={80}
+                                                id={`buttonElement${index}`}
+                                                style={props.imageNumber === index ?
+                                                {border: "6px solid #727272", margin: "10px", borderRadius: "5px"}
+                                                : {margin: "10px", borderRadius: "5px", height: "auto"}}
+                                                key={index + 1000}
+                                                onClick={() => {changeMainMedia(index, "image")}}
+                                                src={`http://localhost:5000/assets/${props.productName}/${media}`}
+                                                alt={`Buton pentru imaginea ${index}`}
+                                            />)
                                         case "mp4":
                                         case "avi":
                                         case "webm":
                                         case "mkv":
                                         case "mov":
-                                            return <p>VIDEO</p>
+                                            return (<img width={80} id={`buttonElement${index}`}
+                                                style={props.imageNumber === index ?
+                                                {border: "6px solid #727272", margin: "10px", borderRadius: "5px"}
+                                                : {margin: "10px", borderRadius: "5px", height: "auto"}}
+                                                key={index + 1000}
+                                                onClick={() => {changeMainMedia(index, "video")}}
+                                                src={videoPlaceholder}
+                                                alt={`Buton pentru video`}/>)
                                         case "obj":
                                         case "fbx":
                                         case "dae":
                                         case "glb":
-                                            return <p>Va fi obiect 3D</p>;
+                                            return (<img width={80} id={`buttonElement${index}`}
+                                                style={props.imageNumber === index ?
+                                                {border: "6px solid #727272", margin: "10px", borderRadius: "5px"}
+                                                : {margin: "10px", borderRadius: "5px", height: "auto"}}
+                                                key={index + 1000}
+                                                onClick={() => {changeMainMedia(index, "3d")}}
+                                                src={obj3dPlaceholder}
+                                                alt={`Buton pentru obiectul 3D`}/>)
                                         default:
                                             return (
                                                 <object
                                                     width={300}
                                                     height={500}
-                                                    data={`http://localhost:5000/assets/${props.productName}/${img}`}
+                                                    data={`http://localhost:5000/assets/${props.productName}/${media}`}
                                                 >
                                                     Oops! Se pare că nu am găsit
                                                     nimic aici.
@@ -122,15 +160,26 @@ function MediaExplorerOverlay(props) {
                         overflow: "auto"
                     }}
                 >
-                    <img
-                        id="theMediaElement"
-                        className={style.mainImage}
-                        style={{ maxHeight: window.innerHeight / 1.5 }}
-                        src={`http://localhost:5000/assets/${
-                            props.productName
-                        }/${mediaNames[props.imageNumber]}`}
-                        alt={`Imagine`}
-                    />
+                    {selectedMedia === "image" ? (
+                        <img
+                            id="theImageElement"
+                            className={style.mainImage}
+                            style={{ maxHeight: window.innerHeight / 1.5 }}
+                            src={`http://localhost:5000/assets/${
+                                props.productName
+                            }/${mediaNames[props.imageNumber]}`}
+                            alt={`Imagine`}
+                        />
+                    ) : (
+                        <video
+                            id="theVideoElement"
+                            className={style.mainImage}
+                            style={{ maxHeight: window.innerHeight / 1.5 }}
+                            src={`http://localhost:5000/assets/${
+                                props.productName
+                            }/${mediaNames[props.imageNumber]}`}
+                        ></video>
+                    )}
                 </div>
             </div>
         </div>

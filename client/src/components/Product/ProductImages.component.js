@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./productImages.module.css";
 import { show } from "./explorerOverlayManager.redux";
 import MediaExplorerOverlay from "./MediaExplorerOverlay.component";
+import obj3dPlaceholder from "./../../assets/images/3dObject.png";
 
 function ProductImages(props) {
     const [mediaNames, setMediaNames] = useState();
@@ -130,7 +131,14 @@ function ProductImages(props) {
                                         case "fbx":
                                         case "dae":
                                         case "glb":
-                                            return <p>Va fi obiect 3D</p>;
+                                            return (<img
+                                                    className={style.images}
+                                                    key={index}
+                                                    onClick={() => {dispatch(show()); setImageNumber(index)}}
+                                                    style={{cursor: "pointer"}}
+                                                    src={obj3dPlaceholder}
+                                                    alt={`Obiect 3D`}
+                                                />)
                                         default:
                                             return (
                                                 <object
@@ -153,7 +161,8 @@ function ProductImages(props) {
                     onClick={() => {
                         if (
                             xPositionProducts >
-                            -320 * (mediaNames.length - 2)
+                            -(window.innerWidth >= 425 ? 320 : 190) *
+                                (mediaNames.length - 2)
                         ) {
                             setXPositionProducts(
                                 xPositionProducts - translateAmount

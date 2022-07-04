@@ -4,6 +4,7 @@ import { Form } from "react-bootstrap";
 
 import style from "./orderDetailsForm.module.css";
 import { counties, easyboxes } from "./locations";
+import TheMap from "./googleMaps.component";
 
 var orderDetails = {
     county: "",
@@ -121,125 +122,132 @@ function CourierDelivery() {
     return (
         <Form.Group className={style.formGroup}>
             <div>
-                <Form.Label>
-                    Județ / Sector
-                    <span style={{ color: "#f00" }}>*</span>
-                </Form.Label>
-                <p className={style.errors} id="countyError"></p>
-                <Form.Select
-                    id="county"
-                    style={{ maxWidth: "400px" }}
-                    onChange={(e) => {
-                        countyValidation(e);
+                <div>
+                    <Form.Label>
+                        Județ / Sector
+                        <span style={{ color: "#f00" }}>*</span>
+                    </Form.Label>
+                    <p className={style.errors} id="countyError"></p>
+                    <Form.Select
+                        id="county"
+                        style={{ maxWidth: "400px" }}
+                        onChange={(e) => {
+                            countyValidation(e);
+                        }}
+                    >
+                        <option value="default">Alegeți județul aici</option>
+                        {counties.map((item, index) => {
+                            return (
+                                <option key={index} value={item}>
+                                    {item}
+                                </option>
+                            );
+                        })}
+                    </Form.Select>
+                </div>
+                <div>
+                    <Form.Label>
+                        Localitate
+                        <span style={{ color: "#f00" }}>*</span>
+                    </Form.Label>
+                    <p className={style.errors} id="cityError"></p>
+                    <Form.Control
+                        type="text"
+                        id="city"
+                        placeholder="Introduceți localitatea"
+                        style={{ maxWidth: "400px" }}
+                        onChange={(e) => {
+                            cityValidation(e);
+                        }}
+                    ></Form.Control>
+                </div>
+                <div>
+                    <Form.Label>
+                        Strada<span style={{ color: "#f00" }}>*</span>
+                    </Form.Label>
+                    <p className={style.errors} id="streetError"></p>
+                    <Form.Control
+                        type="text"
+                        id="street"
+                        placeholder="Introduceți strada"
+                        style={{ maxWidth: "400px" }}
+                        onChange={(e) => {
+                            streetValidation(e);
+                        }}
+                    ></Form.Control>
+                </div>
+                <div>
+                    <Form.Label>
+                        Numărul<span style={{ color: "#f00" }}>*</span>
+                        <span style={{ fontSize: "16px" }}>
+                            {" "}
+                            (dacă locuiți la bloc, scrieți numărul blocului
+                            aici)
+                        </span>
+                    </Form.Label>
+                    <p className={style.errors} id="numberError"></p>
+                    <Form.Control
+                        type="number"
+                        id="number"
+                        min={1}
+                        max={999}
+                        style={{ maxWidth: "100px" }}
+                        onChange={(e) => {
+                            numberValidation(e, 1, 999, false);
+                        }}
+                    ></Form.Control>
+                </div>
+                <div>
+                    <Form.Label>
+                        Scară
+                        <span style={{ fontSize: "16px" }}>
+                            {" "}
+                            (completați doar dacă locuiți la bloc)
+                        </span>
+                    </Form.Label>
+                    <p className={style.errors} id="staircaseError"></p>
+                    <Form.Control
+                        type="text"
+                        id="staircase"
+                        style={{ maxWidth: "100px" }}
+                        onChange={(e) => {
+                            staircaseValidation(e, 1, 999);
+                        }}
+                    ></Form.Control>
+                </div>
+                <div>
+                    <Form.Label>
+                        Apartament
+                        <span style={{ fontSize: "16px" }}>
+                            {" "}
+                            (completați doar dacă locuiți la bloc)
+                        </span>
+                    </Form.Label>
+                    <p className={style.errors} id="apartmentError"></p>
+                    <Form.Control
+                        type="number"
+                        id="apartment"
+                        min={1}
+                        max={200}
+                        style={{ maxWidth: "100px" }}
+                        onChange={(e) => {
+                            numberValidation(e, 1, 200, true);
+                        }}
+                    ></Form.Control>
+                </div>
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        console.log(orderDetails);
                     }}
                 >
-                    <option value="default">Alegeți județul aici</option>
-                    {counties.map((item, index) => {
-                        return (
-                            <option key={index} value={item}>
-                                {item}
-                            </option>
-                        );
-                    })}
-                </Form.Select>
+                    Vezi
+                </button>
             </div>
-            <div>
-                <Form.Label>
-                    Localitate
-                    <span style={{ color: "#f00" }}>*</span>
-                </Form.Label>
-                <p className={style.errors} id="cityError"></p>
-                <Form.Control
-                    type="text"
-                    id="city"
-                    placeholder="Introduceți localitatea"
-                    style={{ maxWidth: "400px" }}
-                    onChange={(e) => {
-                        cityValidation(e);
-                    }}
-                ></Form.Control>
+
+            <div style={{ margin: "10px" }}>
+                <TheMap />
             </div>
-            <div>
-                <Form.Label>
-                    Strada<span style={{ color: "#f00" }}>*</span>
-                </Form.Label>
-                <p className={style.errors} id="streetError"></p>
-                <Form.Control
-                    type="text"
-                    id="street"
-                    placeholder="Introduceți strada"
-                    style={{ maxWidth: "400px" }}
-                    onChange={(e) => {
-                        streetValidation(e);
-                    }}
-                ></Form.Control>
-            </div>
-            <div>
-                <Form.Label>
-                    Numărul<span style={{ color: "#f00" }}>*</span>
-                    <span style={{ fontSize: "16px" }}>
-                        {" "}
-                        (dacă locuiți la bloc, scrieți numărul blocului aici)
-                    </span>
-                </Form.Label>
-                <p className={style.errors} id="numberError"></p>
-                <Form.Control
-                    type="number"
-                    id="number"
-                    min={1}
-                    max={999}
-                    style={{ maxWidth: "100px" }}
-                    onChange={(e) => {
-                        numberValidation(e, 1, 999, false);
-                    }}
-                ></Form.Control>
-            </div>
-            <div>
-                <Form.Label>
-                    Scară
-                    <span style={{ fontSize: "16px" }}>
-                        {" "}
-                        (completați doar dacă locuiți la bloc)
-                    </span>
-                </Form.Label>
-                <p className={style.errors} id="staircaseError"></p>
-                <Form.Control
-                    type="text"
-                    id="staircase"
-                    style={{ maxWidth: "100px" }}
-                    onChange={(e) => {
-                        staircaseValidation(e, 1, 999);
-                    }}
-                ></Form.Control>
-            </div>
-            <div>
-                <Form.Label>
-                    Apartament
-                    <span style={{ fontSize: "16px" }}>
-                        {" "}
-                        (completați doar dacă locuiți la bloc)
-                    </span>
-                </Form.Label>
-                <p className={style.errors} id="apartmentError"></p>
-                <Form.Control
-                    type="number"
-                    id="apartment"
-                    min={1}
-                    max={200}
-                    style={{ maxWidth: "100px" }}
-                    onChange={(e) => {
-                        numberValidation(e, 1, 200, true);
-                    }}
-                ></Form.Control>
-            </div>
-            <button
-                onClick={(e) => {
-                    e.preventDefault();
-                    console.log(orderDetails);
-                }}
-            >
-                Vezi
-            </button>
         </Form.Group>
     );
 }
@@ -267,51 +275,59 @@ function EasyboxDelivery() {
     return (
         <Form.Group className={style.formGroup}>
             <div>
-                <Form.Label>
-                    Localitate
-                    <span style={{ color: "#f00" }}>*</span>
-                </Form.Label>
-                <Form.Select
-                    value={city}
-                    onChange={(e) => {
-                        setCity(e.target.value);
-                        easyboxCityValidation(e);
-                    }}
-                    style={{ maxWidth: "400px" }}
-                >
-                    <option value="default">Alegeți localitatea aici</option>
-                    {cities.map((item, index) => {
-                        return (
-                            <option key={index} value={item}>
-                                {item}
-                            </option>
-                        );
-                    })}
-                </Form.Select>
+                <div>
+                    <Form.Label>
+                        Localitate
+                        <span style={{ color: "#f00" }}>*</span>
+                    </Form.Label>
+                    <Form.Select
+                        value={city}
+                        onChange={(e) => {
+                            setCity(e.target.value);
+                            easyboxCityValidation(e);
+                        }}
+                        style={{ maxWidth: "400px" }}
+                    >
+                        <option value="default">
+                            Alegeți localitatea aici
+                        </option>
+                        {cities.map((item, index) => {
+                            return (
+                                <option key={index} value={item}>
+                                    {item}
+                                </option>
+                            );
+                        })}
+                    </Form.Select>
 
-                <Form.Label>
-                    Locație easybox
-                    <span style={{ color: "#f00" }}>*</span>
-                </Form.Label>
-                <Form.Select
-                    onChange={(e) => {
-                        easyboxLocationValidation(e);
-                    }}
-                    style={{ maxWidth: "400px" }}
-                >
-                    <option value="default">
-                        Alegeți locația easybox aici
-                    </option>
-                    {city !== "default"
-                        ? easyboxes[city].map((item, index) => {
-                              return (
-                                  <option key={index} value={item}>
-                                      {item}
-                                  </option>
-                              );
-                          })
-                        : null}
-                </Form.Select>
+                    <Form.Label>
+                        Locație easybox
+                        <span style={{ color: "#f00" }}>*</span>
+                    </Form.Label>
+                    <Form.Select
+                        onChange={(e) => {
+                            easyboxLocationValidation(e);
+                        }}
+                        style={{ maxWidth: "400px" }}
+                    >
+                        <option value="default">
+                            Alegeți locația easybox aici
+                        </option>
+                        {city !== "default"
+                            ? easyboxes[city].map((item, index) => {
+                                  return (
+                                      <option key={index} value={item}>
+                                          {item}
+                                      </option>
+                                  );
+                              })
+                            : null}
+                    </Form.Select>
+                </div>
+            </div>
+
+            <div style={{ margin: "10px" }}>
+                <TheMap />
             </div>
         </Form.Group>
     );

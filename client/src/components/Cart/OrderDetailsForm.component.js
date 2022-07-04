@@ -14,7 +14,10 @@ function OrderDetailsForm() {
         <>
             <Form className={style.form}>
                 {/* <br /> */}
-                <Form.Group className={style.formGroup}>
+                <Form.Group
+                    className={style.formGroup}
+                    style={{ display: "block" }}
+                >
                     <Form.Label>Metodă de livrare</Form.Label>
                     <Form.Check
                         type={"radio"}

@@ -10,6 +10,8 @@
     background-color: #b2d6e7;
     padding: 10px;
     border-radius: 5px;
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 .formGroup div {
@@ -46,4 +48,10 @@
 
 .errors {
     color: #f00;
+}
+
+@media screen and (max-width: 900px) {
+    .formGroup {
+        display: block;
+    }
 }

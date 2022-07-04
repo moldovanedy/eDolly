@@ -1,91 +1,74 @@
 const router = require("express").Router();
-let User = require("../models/user.model");
+const mysql = require("mysql");
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
-/**
- * @description returns users
- */
-router.route("/").get((req, res) => {
-    User.find()
-        .then((users) => res.json(users))
-        .catch(() =>
-            res
-                .status(500)
-                .json(
-                    "Eroare. Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
-                )
-        );
+var pool = mysql.createPool({
+    connectionLimit: 100,
+    host: "localhost",
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
 });
 
 /**
  * @description creates a new user
  */
-router.route("/add").post((req, res) => {
+router.route("/add").post(async (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    const address = req.body.address;
     const phone = req.body.phone;
 
-    const newUser = new User({ name, email, password, address, phone });
+    pool.query(
+        `SELECT Email FROM users WHERE Email = "${email}"`,
+        async (err, result, fields) => {
+            if (err) {
+                res.send("Eroare: " + err.toString());
+            } else if (result.length > 0) {
+                res.send("Acest e-mail a fost înregistrat deja!");
+            } else {
+                var hashedPassword = await bcrypt.hash(password, 10);
 
-    newUser
-        .save()
-        .then(() => res.json("Cont creat cu succes!"))
-        .catch(() =>
-            res
-                .status(500)
-                .json(
-                    "Eroare. Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
-                )
-        );
+                pool.query(
+                    `INSERT INTO users (ID, Name, Email, Password, Phone) VALUES (UUID_TO_BIN(UUID()), "${name}", "${email}", "${hashedPassword}", "${phone}")`,
+                    (err, result, fields) => {
+                        if (err) {
+                            res.send("Eroare: " + err.toString());
+                        } else {
+                            res.send("Succes!");
+                        }
+                    }
+                );
+            }
+        }
+    );
 });
 
 /**
  * @description finds an user by id
  */
-router.route("/:id").get((req, res) => {
-    User.findById(req.params.id)
-        .then((user) => res.json(user))
-        .catch(() =>
-            res
-                .status(500)
-                .json(
-                    "Eroare. Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
-                )
-        );
+router.route("/login").post((req, res, next) => {
+    passport.authenticate("local", (err, user, info) => {
+        if (err) console.log(err);
+
+        if (!user) res.send("Numele de utilizator sau parola nu sunt corecte!");
+        else {
+            req.logIn(user, (err) => {
+                if (err) {
+                    console.log(err);
+                    res.send("Ceva nu a funcționat corect");
+                    return;
+                }
+                res.send("Autentificat cu succes");
+            });
+        }
+    })(req, res, next);
 });
 
 /**
  * @description modifies user by id
  */
-router.route("/update/:id").post((req, res) => {
-    User.findById(req.params.id)
-        .then((user) => {
-            user.name = req.body.name;
-            user.email = req.body.email;
-            user.password = req.body.password;
-            user.address = req.body.address;
-            user.phone = req.body.phone;
-
-            user.save()
-                .then(() =>
-                    res.json("Informațiile au fost modificate cu succes!")
-                )
-                .catch(() =>
-                    res
-                        .status(500)
-                        .json(
-                            "Eroare. Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
-                        )
-                );
-        })
-        .catch(() =>
-            res
-                .status(500)
-                .json(
-                    "Eroare. Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
-                )
-        );
-});
+router.route("/update/:id").post((req, res) => {});
 
 module.exports = router;

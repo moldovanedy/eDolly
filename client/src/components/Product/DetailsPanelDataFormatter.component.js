@@ -73,6 +73,9 @@ export function RenderSpecificationsAsTable(props) {
 export function RenderReviews(props) {
     var rawData = props.rawData,
         reviews = [];
+    if (rawData === null || rawData === undefined) {
+        return;
+    }
     var separated = rawData.split(/}/gm); // will return array of strings separated on each "}" from rawData
 
     for (let i = 0; i < separated.length; i += 2) {

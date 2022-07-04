@@ -358,13 +358,14 @@ router.route("/addReview").post((req, res) => {
             } else {
                 rawReviews = result[0].Reviews;
 
-                if (rawReviews === undefined) {
+                if (rawReviews === undefined || rawReviews === null) {
                     rawReviews = `[${name}]:{{${rating}}${review}}`;
                 } else {
                     rawReviews = rawReviews.concat(
                         `[${name}]:{{${rating}}${review}}`
                     );
                 }
+                recalculateRating(rawReviews);
 
                 pool.query(
                     `UPDATE products SET Reviews = '${rawReviews}' WHERE id = UUID_TO_BIN('${id}')`,
@@ -382,6 +383,8 @@ router.route("/addReview").post((req, res) => {
     );
 });
 
+function recalculateRating(reviewsString) {}
+
 /**
  * @description finds a product by id
  */
@@ -395,44 +398,6 @@ router.route("/id=:id").get((req, res) => {
             res.send(result);
         }
     );
-});
-
-/**
- * @description deletes a product by id
- */
-router.route("/:id").delete((req, res) => {});
-
-/**
- * @description modifies a product by id
- */
-router.route("/update/:id").post((req, res) => {
-    Product.findById(req.params.id)
-        .then((prod) => {
-            prod.name = req.body.name;
-            prod.price = req.body.price;
-            prod.stock = Number(req.body.stock);
-            prod.priceBeforeDiscount = req.body.priceBeforeDiscount;
-            prod.category = req.body.category;
-            prod.description = req.body.description;
-            prod.specifications = req.body.specifications;
-
-            prod.save()
-                .then(() => res.json("Produs modificat cu succes!"))
-                .catch(() =>
-                    res
-                        .status(500)
-                        .send(
-                            "Eroare. Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
-                        )
-                );
-        })
-        .catch(() =>
-            res
-                .status(500)
-                .send(
-                    "Eroare. Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
-                )
-        );
 });
 
 router.route("/getPhotoNames/name=:name").get((req, res) => {
