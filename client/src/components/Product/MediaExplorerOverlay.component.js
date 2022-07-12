@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import style from "./productImages.module.css";
 import { show } from "./explorerOverlayManager.redux";
@@ -16,9 +17,13 @@ function MediaExplorerOverlay(props) {
         document.getElementById("explorer").style.opacity = 1;
     });
 
-    function changeMainMedia(index, mediaType) {
+    var { id } = useParams();
+
+    async function changeMainMedia(index, mediaType) {
         var mediaElement = document.getElementById("theImageElement"); //default
+        await setSelectedMedia(mediaType);
         switch (selectedMedia) {
+            default:
             case "image":
                 mediaElement = document.getElementById("theImageElement");
                 break;
@@ -28,10 +33,7 @@ function MediaExplorerOverlay(props) {
             case "3d":
                 mediaElement = document.getElementById("the3dElement");
                 break;
-            default:
-                mediaElement = document.getElementById("theImageElement");
         }
-        setSelectedMedia(mediaType);
 
         if (mediaElement === null || mediaElement === undefined) {
             return;
@@ -43,6 +45,13 @@ function MediaExplorerOverlay(props) {
         mediaElement.attributes.getNamedItem(
             "src"
         ).value = `http://localhost:5000/assets/${props.productName}/${mediaNames[index]}`;
+
+        console.log(
+            `http://localhost:5000/assets/${props.productName}/${mediaNames[index]}`
+        );
+        console.log(selectedMedia);
+        console.log(mediaElement);
+
         setTimeout(() => {
             mediaElement.style.transition = "all 0.5s ease-in-out";
             mediaElement.style.opacity = 1;
@@ -105,7 +114,7 @@ function MediaExplorerOverlay(props) {
                                                 id={`buttonElement${index}`}
                                                 style={props.imageNumber === index ?
                                                 {border: "6px solid #727272", margin: "10px", borderRadius: "5px"}
-                                                : {margin: "10px", borderRadius: "5px", height: "auto"}}
+                                                : {margin: "10px", borderRadius: "5px", height: "fit-content"}}
                                                 key={index + 1000}
                                                 onClick={() => {changeMainMedia(index, "image")}}
                                                 src={`http://localhost:5000/assets/${props.productName}/${media}`}
@@ -119,11 +128,11 @@ function MediaExplorerOverlay(props) {
                                             return (<img width={80} id={`buttonElement${index}`}
                                                 style={props.imageNumber === index ?
                                                 {border: "6px solid #727272", margin: "10px", borderRadius: "5px"}
-                                                : {margin: "10px", borderRadius: "5px", height: "auto"}}
+                                                : {margin: "10px", borderRadius: "5px", height: "fit-content"}}
                                                 key={index + 1000}
                                                 onClick={() => {changeMainMedia(index, "video")}}
                                                 src={videoPlaceholder}
-                                                alt={`Buton pentru video`}/>)
+                                                alt={`Buton pentru video ${index}`}/>)
                                         case "obj":
                                         case "fbx":
                                         case "dae":
@@ -133,7 +142,7 @@ function MediaExplorerOverlay(props) {
                                                 {border: "6px solid #727272", margin: "10px", borderRadius: "5px"}
                                                 : {margin: "10px", borderRadius: "5px", height: "auto"}}
                                                 key={index + 1000}
-                                                onClick={() => {changeMainMedia(index, "3d")}}
+                                                onClick={() => {document.location.pathname = `/vizualizator-3d/${id}`}}
                                                 src={obj3dPlaceholder}
                                                 alt={`Buton pentru obiectul 3D`}/>)
                                         default:
@@ -169,9 +178,18 @@ function MediaExplorerOverlay(props) {
                                 props.productName
                             }/${mediaNames[props.imageNumber]}`}
                             alt={`Imagine`}
+                            onClick={() => {
+                                window.open(
+                                    `http://localhost:5000/assets/${
+                                        props.productName
+                                    }/${mediaNames[props.imageNumber]}`,
+                                    "_blank"
+                                );
+                            }}
                         />
                     ) : (
                         <video
+                            controls
                             id="theVideoElement"
                             className={style.mainImage}
                             style={{ maxHeight: window.innerHeight / 1.5 }}

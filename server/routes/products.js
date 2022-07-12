@@ -6,7 +6,6 @@ const path = require("path");
 const io = require("fs");
 const multer = require("multer");
 const jimp = require("jimp");
-let Product = require("./../models/product.model");
 
 var pool = mysql.createPool({
     connectionLimit: 100,

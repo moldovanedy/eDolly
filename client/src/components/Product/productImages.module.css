@@ -41,6 +41,7 @@
 
 .carouselSlider img {
     margin: 10px;
+    height: auto;
 }
 
 .imageSliderButton {
@@ -120,6 +121,11 @@
         flex-direction: row;
         flex-wrap: nowrap;
         overflow-x: auto;
+    }
+
+    /* weird strech [only for first image (:|)] if next property is not present */
+    img {
+        height: fit-content;
     }
 
     .mainImage {

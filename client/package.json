@@ -25,6 +25,7 @@
         "react-redux": "^7.2.6",
         "react-router-dom": "^6.2.1",
         "react-scripts": "^4.0.3",
+        "three": "^0.142.0",
         "use-file-picker": "^1.4.1",
         "web-vitals": "^1.1.2"
     },

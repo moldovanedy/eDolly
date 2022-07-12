@@ -31,7 +31,7 @@ router.route("/add").post(async (req, res) => {
                 var hashedPassword = await bcrypt.hash(password, 10);
 
                 pool.query(
-                    `INSERT INTO users (ID, Name, Email, Password, Phone) VALUES (UUID_TO_BIN(UUID()), "${name}", "${email}", "${hashedPassword}", "${phone}")`,
+                    `INSERT INTO users (Name, Email, Password, Phone) VALUES ("${name}", "${email}", "${hashedPassword}", "${phone}")`,
                     (err, result, fields) => {
                         if (err) {
                             res.send("Eroare: " + err.toString());
@@ -64,6 +64,13 @@ router.route("/login").post((req, res, next) => {
             });
         }
     })(req, res, next);
+});
+
+/**
+ * @description gets user's account data
+ */
+router.route("/getUserAccount").get((req, res) => {
+    res.send(req.user);
 });
 
 /**

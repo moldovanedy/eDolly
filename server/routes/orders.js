@@ -12,44 +12,51 @@ var pool = mysql.createPool({
 /**
  * @description Creates a new order
  */
-router.post("/add", (req, res) => {
-    const products = req.body.products;
-    const delivery = req.body.delivery;
-    const totalPrice = req.body.totalPrice;
-    var county = req.body.county;
-    var city = req.body.city;
-    var street = req.body.street;
-    var number = req.body.number;
-    var apartment = req.body.apartment;
-    var staircase = req.body.staircase;
+router.route("/add").post((req, res) => {
+    var products = req.body.products;
+    var deliveryMethod = req.body.deliveryMethod;
+    var courier = req.body.courier;
+    var payment = req.body.payment;
+    var address = req.body.address;
+    var user = req.body.user;
+    var additionalInfo = req.body.additionalInfo;
 
-    if (county === "default") {
-        res.send("Nu ați ales un județ");
+    if (
+        products === undefined ||
+        products === null ||
+        deliveryMethod === undefined ||
+        deliveryMethod === null ||
+        courier === undefined ||
+        courier === null ||
+        payment === undefined ||
+        payment === null ||
+        address === undefined ||
+        address === null ||
+        user === undefined ||
+        user === null
+    ) {
+        res.send("Datele nu au fost completate corespunzător!");
+        return;
+    } else {
+        var delivery = "curier";
+        if (deliveryMethod === "courier") {
+            delivery = "curier";
+        } else {
+            delivery = "easybox";
+        }
+        pool.query(
+            `INSERT INTO orders (Products, DeliveryMethod, Courier, Payment, User, Address, AdditionalInfo) VALUES ("${products}", "${delivery}"
+            , "${courier}", "${payment}", '${user.toString()}', '${address.toString()}', "${additionalInfo}")`,
+            (err, result, fields) => {
+                if (err) {
+                    res.send("A apărut o eroare!");
+                    console.log(err);
+                } else {
+                    res.send("Comanda a fost plasată!");
+                }
+            }
+        );
     }
-
-    if (city.length <= 1) {
-        res.send("Numele localității e prea scurt!");
-    } else if (city.length >= 99) {
-        res.send("Numele localității e prea lung!");
-    }
-
-    if (street.length <= 1) {
-        res.send("Numele străzii e prea scurt!");
-    } else if (street.length >= 99) {
-        res.send("Numele străzii e prea lung!");
-    }
-
-    if (isNaN(number)) {
-        res.send("Vă rugăm introduceți un număr valid!");
-    }
-
-    if (isNaN(apartment)) {
-        res.send("Vă rugăm introduceți un număr valid de apartament!");
-    }
-
-    if (staircase.length > 2) {
-        res.send("Numele scării e prea lung!");
-    }
-
-    pool.query(``, (err, result, fields) => {});
 });
+
+module.exports = router;

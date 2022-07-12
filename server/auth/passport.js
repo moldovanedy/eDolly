@@ -1,6 +1,5 @@
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
-const { response } = require("express");
 const mysql = require("mysql");
 
 var pool = mysql.createPool({
@@ -19,7 +18,7 @@ module.exports = function (passport) {
                 pool.query(
                     `SELECT * FROM users WHERE Email LIKE "${email}"`,
                     (err, result, fields) => {
-                        if (!result) {
+                        if (result[0] === null || result[0] === undefined) {
                             return done(null, false);
                         }
 
@@ -48,8 +47,11 @@ module.exports = function (passport) {
     });
 
     passport.deserializeUser(function (id, done) {
-        pool.query(`SELECT * FROM users WHERE id=${id}`, function (err, user) {
-            done(err, user);
-        });
+        pool.query(
+            `SELECT * FROM users WHERE ID = "${id}"`,
+            function (err, user) {
+                done(err, user);
+            }
+        );
     });
 };

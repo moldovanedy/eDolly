@@ -46,8 +46,14 @@
     color: #000;
 }
 
-.errors {
-    color: #f00;
+.review {
+    font-size: 20px;
+    position: relative;
+    width: 95%;
+    max-width: 1000px;
+    height: 300px;
+    resize: both;
+    white-space: pre-wrap;
 }
 
 .toast {

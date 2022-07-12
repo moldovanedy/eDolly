@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Form } from "react-bootstrap";
+import { Form, Toast, ToastContainer } from "react-bootstrap";
 
 import Header from "./../../components/Header.component";
 import Footer from "./../../components/Footer.component";
@@ -13,12 +13,16 @@ import {
     faLock
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Login() {
     var [passwordVisibility, setPasswordVisibility] = useState(false);
 
     var [email, setEmail] = useState("");
     var [password, setPassword] = useState("");
+
+    var [res, setRes] = useState(null);
+    var [show, setShow] = useState(false);
 
     function togglePasswordVisibility() {
         setPasswordVisibility(!passwordVisibility);
@@ -94,9 +98,39 @@ function Login() {
             })
                 .then((response) => {
                     console.log(response);
+                    setShow(true);
+
+                    if (response.data === "Autentificat cu succes") {
+                        setRes({
+                            title: "Succes!",
+                            content: "Autentificat cu succes!"
+                        });
+                    } else if (
+                        response.data ===
+                        "Numele de utilizator sau parola nu sunt corecte!"
+                    ) {
+                        setRes({
+                            title: "Date incorecte!",
+                            content:
+                                "Numele de utilizator sau parola nu sunt corecte!"
+                        });
+                    } else if (
+                        response.data === "Ceva nu a funcționat corect"
+                    ) {
+                        setRes({
+                            title: "Eroare!",
+                            content:
+                                "Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
+                        });
+                    }
                 })
                 .catch((e) => {
                     console.log(e);
+                    setRes({
+                        title: "Eroare!",
+                        content:
+                            "Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
+                    });
                 });
         } else {
             console.log(
@@ -114,6 +148,25 @@ function Login() {
             </Helmet>
 
             <Header />
+
+            {show ? (
+                <div className={style.toast}>
+                    <ToastContainer position="bottom-center">
+                        <Toast
+                            onClose={() => setShow(false)}
+                            show={show}
+                            delay="5000"
+                            autohide
+                            style={{ boxShadow: "3px 1px 6px 3px" }}
+                        >
+                            <Toast.Header closeButton={false}>
+                                {res.title}
+                            </Toast.Header>
+                            <Toast.Body>{res.content}</Toast.Body>
+                        </Toast>
+                    </ToastContainer>
+                </div>
+            ) : null}
 
             <main className={style.main}>
                 <h2
@@ -167,6 +220,15 @@ function Login() {
                                         : faEyeSlash
                                 }
                             />
+                        </div>
+
+                        <div style={{ marginTop: "20px" }}>
+                            <Link to={"/parola-uitata"}>Am uitat parola!</Link>
+                        </div>
+
+                        <div style={{ marginTop: "20px" }}>
+                            Nu aveți un cont?{" "}
+                            <Link to={"/creare-cont"}>Creați unul</Link>
                         </div>
                     </Form.Group>
                 </Form>

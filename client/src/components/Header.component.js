@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //prettier-ignore
-import { faSearch, faShoppingCart, faHeart, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faShoppingCart, faHeart, faTimes, faUserCircle, faDog} from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 
 import style from "./../main.module.css";
 import logo from "../logo.svg";
 import Navigation from "./Navigation.component";
+import axios from "axios";
 
 function Header() {
     const [searchBoxActive, setSearchBoxActive] = useState(false);
+    const [userAccountData, setUserAccountData] = useState(null);
 
     var count = useSelector((state) => state.products.value);
     var cartSize = useSelector((state) => state.cartProducts.value);
@@ -21,6 +23,16 @@ function Header() {
             `http://localhost:3000/cautare=${name}/pag=1`
         );
     }
+
+    useEffect(() => {
+        axios({
+            method: "GET",
+            withCredentials: true,
+            url: "http://localhost:5000/users/getUserAccount"
+        }).then((res) => {
+            setUserAccountData(res.data);
+        });
+    }, []);
 
     function SearchBox() {
         return (
@@ -144,6 +156,36 @@ function Header() {
                             )}
                         </div>
                     </Link>
+
+                    {userAccountData !== null &&
+                    userAccountData !== undefined &&
+                    userAccountData !== "" ? (
+                        <Link to="/cos-de-cumparaturi">
+                            <FontAwesomeIcon
+                                icon={faUserCircle}
+                                size="1x"
+                                title="Contul tău"
+                                style={{
+                                    cursor: "pointer",
+                                    marginLeft: "10",
+                                    color: "#0099ff"
+                                }}
+                            />
+                        </Link>
+                    ) : (
+                        <Link to="/logare">
+                            <FontAwesomeIcon
+                                icon={faDog}
+                                size="1x"
+                                title="Creați un cont"
+                                style={{
+                                    cursor: "pointer",
+                                    marginLeft: "10",
+                                    color: "#0099ff"
+                                }}
+                            />
+                        </Link>
+                    )}
                 </div>
             </header>
             {searchBoxActive === true ? <SearchBox /> : null}

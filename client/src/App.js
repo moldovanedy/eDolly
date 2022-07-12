@@ -10,7 +10,10 @@ import SearchResults from "./pages/search/searchResults";
 import Product from "./pages/product";
 import AddReview from "./pages/addReview";
 import OrderDetails from "./pages/orderDetails";
+import PaymentAndOrderConfirmation from "./pages/paymentAndOrderConfirmation";
+import Obj3dExplorer from "./pages/obj3dExplorer";
 
+import ForgotPassword from "./pages/auth/forgotPassword";
 import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
 
@@ -22,9 +25,19 @@ function App() {
                 <Route path="/cos-de-cumparaturi" exact element={<Cart />} />
                 <Route path="/favorite" exact element={<FavouriteProducts />} />
                 <Route path="/comanda" exact element={<OrderDetails />} />
+                <Route
+                    path="/plata-si-finalizare"
+                    exact
+                    element={<PaymentAndOrderConfirmation />}
+                />
 
                 <Route path="/creare-cont" exact element={<Register />} />
                 <Route path="/logare" exact element={<Login />} />
+                <Route
+                    path="/parola-uitata"
+                    exact
+                    element={<ForgotPassword />}
+                />
 
                 <Route
                     path={`/produse=:categorie/pag=:page`}
@@ -37,6 +50,10 @@ function App() {
                 />
 
                 <Route path={"/produs/:id"} element={<Product />} />
+                <Route
+                    path={"/vizualizator-3d/:id"}
+                    element={<Obj3dExplorer />}
+                />
                 <Route path={"/recenzie-produs/:id"} element={<AddReview />} />
 
                 <Route

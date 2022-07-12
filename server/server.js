@@ -19,7 +19,7 @@ app.use(
         saveUninitialized: true,
     })
 );
-app.use(cookieParser("Caine1234"));
+// app.use(cookieParser("Caine1234"));
 app.use(passport.initialize());
 app.use(passport.session());
 require("./auth/passport")(passport);
@@ -28,11 +28,11 @@ app.use("/assets", express.static(path.join(__dirname, "assets")));
 
 const productsRouter = require("./routes/products");
 const usersRouter = require("./routes/users");
-//const ordersRouter = require("./routes/orders");
+const ordersRouter = require("./routes/orders");
 
 app.use("/products", productsRouter);
 app.use("/users", usersRouter);
-//app.use("/orders", ordersRouter);
+app.use("/orders", ordersRouter);
 
 app.listen(port, () => {
     console.log(`Server-ul rulează pe portul: ${port}`);

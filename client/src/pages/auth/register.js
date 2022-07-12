@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Form } from "react-bootstrap";
+import { Form, Toast, ToastContainer } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import Header from "./../../components/Header.component";
 import Footer from "./../../components/Footer.component";
@@ -26,7 +27,13 @@ function Register() {
     var [email, setEmail] = useState("");
     var [phone, setPhone] = useState("");
     var [password, setPassword] = useState("");
-    var [confirmPassword, setConfirmPassword] = useState("");
+    var [confirmPassword, setConfirmPassword] = useState({
+        title: "",
+        content: ""
+    });
+
+    var [res, setRes] = useState(null);
+    var [show, setShow] = useState(false);
 
     function togglePasswordVisibility() {
         setPasswordVisibility(!passwordVisibility);
@@ -190,9 +197,30 @@ function Register() {
             })
                 .then((response) => {
                     console.log(response);
+                    setShow(true);
+                    if (response.data === "Succes!") {
+                        console.log("Dolly");
+                        setRes({
+                            title: "Succes!",
+                            content: "Contul a fost creat cu succes!"
+                        });
+                    } else if (
+                        response.data ===
+                        "Acest e-mail a fost înregistrat deja!"
+                    ) {
+                        setRes({
+                            title: "Email-ul e înregistrat deja",
+                            content: "Acest e-mail a fost înregistrat deja!"
+                        });
+                    }
                 })
                 .catch((e) => {
                     console.log(e);
+                    setRes({
+                        title: "Eroare!",
+                        content:
+                            "Ceva nu a funcționat corect. Vă rugăm încercați mai târziu."
+                    });
                 });
         } else {
             console.log(
@@ -214,6 +242,24 @@ function Register() {
             </Helmet>
 
             <Header />
+
+            {show ? (
+                <div className={style.toast}>
+                    <ToastContainer position="bottom-center">
+                        <Toast
+                            onClose={() => setShow(false)}
+                            show={show}
+                            delay="5000"
+                            autohide
+                        >
+                            <Toast.Header closeButton={false}>
+                                {res.title}
+                            </Toast.Header>
+                            <Toast.Body>{res.content}</Toast.Body>
+                        </Toast>
+                    </ToastContainer>
+                </div>
+            ) : null}
 
             <main className={style.main}>
                 <h2
@@ -323,6 +369,11 @@ function Register() {
                                         : faEyeSlash
                                 }
                             />
+                        </div>
+
+                        <div style={{ marginTop: "20px" }}>
+                            Aveți deja un cont?{" "}
+                            <Link to={"/logare"}>Autentificați-vă</Link>
                         </div>
                     </Form.Group>
                 </Form>
