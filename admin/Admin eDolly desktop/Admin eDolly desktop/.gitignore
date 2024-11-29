@@ -5,8 +5,8 @@
 ./Admin_eDolly_Desktop/Admin eDolly Desktop_TemporaryKey.pfx
 
 .vs
-./GenerateTestData/bin
-./GenerateTestData/obj
+/GenerateTestData/bin
+/GenerateTestData/obj
 
 *.cache
 *.application
