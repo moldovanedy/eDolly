@@ -1,8 +1,0 @@
-is_global = true
-build_property.RootNamespace = GenerateTestData
-build_property.ProjectDir = /run/media/Edy/Dev_Drive/eDolly/admin/Admin eDolly desktop/Admin eDolly desktop/GenerateTestData/
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
-build_property.CsWinRTUseWindowsUIXamlProjections = false
-build_property.EffectiveAnalysisLevelStyle = 
-build_property.EnableCodeStyleSeverity = 
