@@ -1,8 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-import Header from "../../components/Header.component";
-import Footer from "../../components/Footer.component";
+import Header from "../../components/Header.component.js";
+import Footer from "../../components/Footer.component.js";
 
 function PrivacyPolicy() {
     return (

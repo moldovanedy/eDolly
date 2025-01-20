@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet";
 import { Form, Toast, ToastContainer } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import Header from "./../../components/Header.component";
-import Footer from "./../../components/Footer.component";
+import Header from "./../../components/Header.component.js";
+import Footer from "./../../components/Footer.component.js";
 import style from "./loginAndRegister.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

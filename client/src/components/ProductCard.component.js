@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { increment, decrement } from "./Cart/productManager.redux";
+import { increment, decrement } from "./Cart/productManager.redux.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,7 +9,7 @@ import style from "./../homepage.module.css";
 import {
     addToFavourites,
     removeFromFavourites
-} from "./Cart/productManager.redux";
+} from "./Cart/productManager.redux.js";
 
 function ProductCard(props) {
     const dispatch = useDispatch();

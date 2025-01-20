@@ -5,8 +5,8 @@ import axios from "axios";
 import { Helmet } from "react-helmet";
 
 import style from "./addReview.module.css";
-import Header from "./../components/Header.component";
-import Footer from "./../components/Footer.component";
+import Header from "./../components/Header.component.js";
+import Footer from "./../components/Footer.component.js";
 import icon from "./../assets/icons/favicon.ico";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";

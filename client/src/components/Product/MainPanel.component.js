@@ -8,21 +8,21 @@ import {
 import { useDispatch } from "react-redux";
 
 import style from "./../../pages/product.module.css";
-import { increment, decrement } from "./../Cart/productManager.redux";
+import { increment, decrement } from "./../Cart/productManager.redux.js";
 import {
     incrementCartSize,
     decrementCartSize
-} from "./../Cart/cartProductManager.redux";
+} from "./../Cart/cartProductManager.redux.js";
 import {
     addToFavourites,
     removeFromFavourites
-} from "./../Cart/productManager.redux";
+} from "./../Cart/productManager.redux.js";
 import {
     addToCart,
     removeFromCart,
     doesProductExist
-} from "./../Cart/cartProductManager.redux";
-import ProductImages from "./ProductImages.component";
+} from "./../Cart/cartProductManager.redux.js";
+import ProductImages from "./ProductImages.component.js";
 
 function MainPanel(props) {
     var data = props.componentData;

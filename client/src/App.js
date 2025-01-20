@@ -1,21 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Homepage from "./Homepage";
-import Err404 from "./404";
-import Cart from "./pages/cart";
-import FavouriteProducts from "./pages/favouriteProducts";
-import PrivacyPolicy from "./pages/help/PrivacyPolicy";
-import SearchResults from "./pages/search/searchResults";
-import Product from "./pages/product";
-import AddReview from "./pages/addReview";
-import OrderDetails from "./pages/orderDetails";
-import PaymentAndOrderConfirmation from "./pages/paymentAndOrderConfirmation";
-import Obj3dExplorer from "./pages/obj3dExplorer";
+import Homepage from "./Homepage.js";
+import Err404 from "./404.js";
+import Cart from "./pages/cart.js";
+import FavouriteProducts from "./pages/favouriteProducts.js";
+import PrivacyPolicy from "./pages/help/PrivacyPolicy.js";
+import SearchResults from "./pages/search/searchResults.js";
+import Product from "./pages/product.js";
+import AddReview from "./pages/addReview.js";
+import OrderDetails from "./pages/orderDetails.js";
+import PaymentAndOrderConfirmation from "./pages/paymentAndOrderConfirmation.js";
+import Obj3dExplorer from "./pages/obj3dExplorer.js";
 
-import ForgotPassword from "./pages/auth/forgotPassword";
-import Register from "./pages/auth/register";
-import Login from "./pages/auth/login";
+import ForgotPassword from "./pages/auth/forgotPassword.js";
+import Register from "./pages/auth/register.js";
+import Login from "./pages/auth/login.js";
 
 function App() {
     return (

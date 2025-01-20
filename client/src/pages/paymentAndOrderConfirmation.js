@@ -4,11 +4,11 @@ import axios from "axios";
 import { Form, Table, Toast, ToastContainer } from "react-bootstrap";
 
 import style from "./paymentAndOrderConfirmation.module.css";
-import Header from "../components/Header.component";
+import Header from "../components/Header.component.js";
 import CardPayment, {
     getCardDetails
-} from "../components/Cart/CardPayment.component";
-import { getCartProducts } from "./../components/Cart/cartProductManager.redux";
+} from "../components/Cart/CardPayment.component.js";
+import { getCartProducts } from "./../components/Cart/cartProductManager.redux.js";
 
 function PaymentAndOrderConfirmation() {
     const [userAccountData, setUserAccountData] = useState(null);

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 
-import Header from "../components/Header.component";
-import { getFavouriteProducts } from "../components/Cart/productManager.redux";
-import render from "./search/renderProducts";
+import Header from "../components/Header.component.js";
+import { getFavouriteProducts } from "../components/Cart/productManager.redux.js";
+import render from "./search/renderProducts.js";
 import style from "./search/searchResults.module.css";
 
 function FavouriteProducts() {

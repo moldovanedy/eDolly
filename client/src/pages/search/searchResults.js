@@ -7,18 +7,18 @@ import { Helmet } from "react-helmet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import Header from "../../components/Header.component";
-import render from "./renderProducts";
-import Footer from "../../components/Footer.component";
+import Header from "../../components/Header.component.js";
+import render from "./renderProducts.js";
+import Footer from "../../components/Footer.component.js";
 import style from "./searchResults.module.css";
-import Filters from "../../components/Filters.component";
+import Filters from "../../components/Filters.component.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
     changeSortingRule,
     setProductsPerPage
-} from "../../components/sortingManager.redux";
+} from "../../components/sortingManager.redux.js";
 import logo from "./../../assets/icons/favicon.ico";
-import ProductCardPlaceholder from "../../components/Product/ProductCardPlaceholder.component";
+import ProductCardPlaceholder from "../../components/Product/ProductCardPlaceholder.component.js";
 
 function SearchResults(props) {
     var { productName, page, categorie } = useParams();

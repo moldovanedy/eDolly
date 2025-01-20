@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 

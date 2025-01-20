@@ -1,8 +1,8 @@
 import React from "react";
 
 import defaultImage from "./../../assets/images/imgNotFound.jpg";
-import ProductCard from "../../components/ProductCard.component";
-import { getFavouriteProducts } from "../../components/Cart/productManager.redux";
+import ProductCard from "../../components/ProductCard.component.js";
+import { getFavouriteProducts } from "../../components/Cart/productManager.redux.js";
 
 function render(prod, filters = null, sort = null) {
     var productName,

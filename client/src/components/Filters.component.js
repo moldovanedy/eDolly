@@ -7,7 +7,7 @@ import {
     setMaxPrice,
     setMinRating,
     setMaxRating
-} from "./filterManager.redux";
+} from "./filterManager.redux.js";
 
 import style from "./../pages/search/searchResults.module.css";
 

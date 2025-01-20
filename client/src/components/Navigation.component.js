@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductCategories } from "./ProductCategories.component";
+import { ProductCategories } from "./ProductCategories.component.js";
 import { Link } from "react-router-dom";
 import {
     Container,

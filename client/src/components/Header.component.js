@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 import style from "./../main.module.css";
 import logo from "../logo.svg";
-import Navigation from "./Navigation.component";
+import Navigation from "./Navigation.component.js";
 import axios from "axios";
 
 function Header() {

@@ -7,7 +7,7 @@ import style from "./../../pages/product.module.css";
 import {
     RenderSpecificationsAsTable,
     RenderReviews
-} from "./DetailsPanelDataFormatter.component";
+} from "./DetailsPanelDataFormatter.component.js";
 
 function DetailsPanel(props) {
     var data = props.componentData;

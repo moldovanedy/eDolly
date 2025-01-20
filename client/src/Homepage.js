@@ -1,7 +1,7 @@
 import "./App.css";
-import Header from "./components/Header.component";
-import ProductScroller from "./components/ProductScroller.component";
-import Footer from "./components/Footer.component";
+import Header from "./components/Header.component.js";
+import ProductScroller from "./components/ProductScroller.component.js";
+import Footer from "./components/Footer.component.js";
 import { Helmet } from "react-helmet";
 
 function Homepage() {

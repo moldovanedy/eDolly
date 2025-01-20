@@ -9,8 +9,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import style from "./productImages.module.css";
-import { show } from "./explorerOverlayManager.redux";
-import MediaExplorerOverlay from "./MediaExplorerOverlay.component";
+import { show } from "./explorerOverlayManager.redux.js";
+import MediaExplorerOverlay from "./MediaExplorerOverlay.component.js";
 import obj3dPlaceholder from "./../../assets/images/3dObject.png";
 
 function ProductImages(props) {

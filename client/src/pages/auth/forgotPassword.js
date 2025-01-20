@@ -1,6 +1,6 @@
 import React from "react";
 
-import Header from "../../components/Header.component";
+import Header from "../../components/Header.component.js";
 
 function ForgotPassword() {
     return (

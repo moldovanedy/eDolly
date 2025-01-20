@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 
 import style from "./orderDetailsForm.module.css";
-import { counties, easyboxes } from "./locations";
-import TheMap from "./googleMaps.component";
+import { counties, easyboxes } from "./locations.js";
+import TheMap from "./googleMaps.component.js";
 
 var orderDetails = {
     county: "",

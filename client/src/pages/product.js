@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Breadcrumb } from "react-bootstrap";
 
-import Header from "./../components/Header.component";
-import Footer from "./../components/Footer.component";
+import Header from "./../components/Header.component.js";
+import Footer from "./../components/Footer.component.js";
 import icon from "./../assets/icons/favicon.ico";
 // import style from "./product.module.css";
-import MainPanel from "./../components/Product/MainPanel.component";
-import DetailsPanel from "./../components/Product/DetailsPanel.component";
+import MainPanel from "./../components/Product/MainPanel.component.js";
+import DetailsPanel from "./../components/Product/DetailsPanel.component.js";
 
 function Product() {
     var { id } = useParams();

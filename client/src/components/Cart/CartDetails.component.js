@@ -6,7 +6,7 @@ import {
     removeFromCart,
     modifyNumberOfProducts,
     getNumberOfProducts
-} from "./cartProductManager.redux";
+} from "./cartProductManager.redux.js";
 
 function CartDetails(props) {
     var productData = props.products;

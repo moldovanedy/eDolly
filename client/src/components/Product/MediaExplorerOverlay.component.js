@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import style from "./productImages.module.css";
-import { show } from "./explorerOverlayManager.redux";
+import { show } from "./explorerOverlayManager.redux.js";
 import videoPlaceholder from "./../../assets/images/Video.png";
 import obj3dPlaceholder from "./../../assets/images/3dObject.png";
 

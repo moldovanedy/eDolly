@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import Helmet from "react-helmet";
 import axios from "axios";
 
-import Header from "./../components/Header.component";
-import { getCartProducts } from "./../components/Cart/cartProductManager.redux";
-import Footer from "./../components/Footer.component";
-import OrderDetailsForm from "./../components/Cart/OrderDetailsForm.component";
+import Header from "./../components/Header.component.js";
+import { getCartProducts } from "./../components/Cart/cartProductManager.redux.js";
+import Footer from "./../components/Footer.component.js";
+import OrderDetailsForm from "./../components/Cart/OrderDetailsForm.component.js";
 
 import style from "./orderDetails.module.css";
 import { Link } from "react-router-dom";

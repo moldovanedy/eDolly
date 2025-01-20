@@ -13,7 +13,7 @@ import {
     streetValidation,
     easyboxCityValidation,
     easyboxLocationValidation
-} from "./OrderDetailsFormDeliveryMethod.component";
+} from "./OrderDetailsFormDeliveryMethod.component.js";
 
 function Error(props) {
     var [show, setShow] = useState(false);

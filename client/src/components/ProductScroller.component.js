@@ -9,7 +9,7 @@ import {
 
 import "./../App.css";
 import style from "./../homepage.module.css";
-import render from "../pages/search/renderProducts";
+import render from "../pages/search/renderProducts.js";
 
 var defaultRequest = {
     name: "",

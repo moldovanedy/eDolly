@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 
-import Header from "../components/Header.component";
-import { getCartProducts } from "./../components/Cart/cartProductManager.redux";
-import CartDetails from "../components/Cart/CartDetails.component";
+import Header from "../components/Header.component.js";
+import { getCartProducts } from "./../components/Cart/cartProductManager.redux.js";
+import CartDetails from "../components/Cart/CartDetails.component.js";
 
 function Cart() {
     var cartProducts = getCartProducts();
