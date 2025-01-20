@@ -60,6 +60,10 @@ function Navigation() {
                                                     >
                                                         <Link
                                                             to={`/produse=${subItem}/pag=1`}
+                                                            style={{
+                                                                textDecoration:
+                                                                    "none"
+                                                            }}
                                                             onClick={() => {
                                                                 //ugly, but works :)
                                                                 window.location.pathname.contains(

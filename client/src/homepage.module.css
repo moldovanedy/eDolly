@@ -71,16 +71,16 @@ body {
     cursor: pointer;
     border-radius: 5px;
     border: 1px solid #777777;
-    transition: background-color 0.3s ease-in;
+    transition: background-color 0.2s ease-in;
 }
 
 .buttonLeft {
-    margin-left: 2%;
+    margin-left: 10px;
 }
 
 .buttonRight {
     float: left;
-    margin-right: 2%;
+    margin-right: 10px;
 }
 
 .button:hover {
@@ -89,6 +89,6 @@ body {
 
 .footer {
     width: 100%;
-    background-color: #a6bff3;
+    background-color: #dbdbdb;
     min-height: 100px;
 }

@@ -91,7 +91,7 @@ function Header() {
                         title="Căutați produse"
                         style={{
                             cursor: "pointer",
-                            marginLeft: "10",
+                            marginLeft: "10px",
                             color: "#0099ff"
                         }}
                         onClick={() => {
@@ -108,7 +108,7 @@ function Header() {
                                 title="Produse favorite"
                                 style={{
                                     cursor: "pointer",
-                                    marginLeft: "10",
+                                    marginLeft: "10px",
                                     color: "#0099ff"
                                 }}
                             />
@@ -136,7 +136,7 @@ function Header() {
                                 title="Coșul de cumpărături"
                                 style={{
                                     cursor: "pointer",
-                                    marginLeft: "10",
+                                    marginLeft: "10px",
                                     color: "#0099ff"
                                 }}
                             />
@@ -167,7 +167,7 @@ function Header() {
                                 title="Contul tău"
                                 style={{
                                     cursor: "pointer",
-                                    marginLeft: "10",
+                                    marginLeft: "10px",
                                     color: "#0099ff"
                                 }}
                             />
@@ -175,12 +175,12 @@ function Header() {
                     ) : (
                         <Link to="/logare">
                             <FontAwesomeIcon
-                                icon={faDog}
+                                icon={faUserCircle}
                                 size="1x"
                                 title="Creați un cont"
                                 style={{
                                     cursor: "pointer",
-                                    marginLeft: "10",
+                                    marginLeft: "10px",
                                     color: "#0099ff"
                                 }}
                             />

@@ -1,5 +1,4 @@
 .main {
-    background-image: linear-gradient(#3913e04b, #eb75274b);
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -16,7 +15,7 @@
     width: 90%;
     max-width: 550px;
     margin: auto;
-    background-color: #afdaee;
+    background-color: #ddeff7;
     border-radius: 10px;
     padding: 15px;
 }
@@ -27,18 +26,17 @@
 }
 
 .createAccount {
-    font-size: 40px;
-    padding: 20px;
+    font-size: 24px;
+    padding: 10px;
     border-radius: 10px;
     background-color: #90f0f3;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
     margin-bottom: 50px;
 }
 
 .createAccount:hover {
-    border-radius: 25px;
-    background-color: #3011be;
-    color: #fff;
+    border-radius: 15px;
+    background-color: #33bacc;
 }
 
 .labels {
