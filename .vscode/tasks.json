@@ -18,60 +18,6 @@
             "label": "Start client part",
             "detail": "react-scripts start",
             "promptOnClose": true
-        },
-        {
-            "type": "npm",
-            "script": "start",
-            "path": "server/",
-            "problemMatcher": [],
-            "label": "Start server part",
-            "detail": "node server.js",
-            "promptOnClose": true
-        },
-        {
-            "type": "npm",
-            "script": "server-start",
-            "path": "server/",
-            "problemMatcher": [],
-            "label": "Start server part in development mode",
-            "detail": "nodemon server.js",
-            "promptOnClose": true
-        },
-        {
-            "label": "build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/admin/Admin eDolly desktop/Admin eDolly desktop/DatabaseRecordCorrection/DatabaseRecordCorrection.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/admin/Admin eDolly desktop/Admin eDolly desktop/DatabaseRecordCorrection/DatabaseRecordCorrection.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "--project",
-                "${workspaceFolder}/admin/Admin eDolly desktop/Admin eDolly desktop/DatabaseRecordCorrection/DatabaseRecordCorrection.csproj"
-            ],
-            "problemMatcher": "$msCompile"
         }
     ]
 }
